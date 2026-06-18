@@ -5,7 +5,12 @@
       "Bash(npx tsc:*)",
       "Bash(curl -s http://localhost:3000/dashboard -o /dev/null -w \"%{http_code}\")",
       "Bash(npm run:*)",
-      "Bash(curl -s http://localhost:3000/dashboard -o /dev/null -w \"%{http_code}\\\\n\")"
+      "Bash(curl -s http://localhost:3000/dashboard -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(cat .env.local.example)",
+      "Bash(cat .env.example)",
+      "Bash(npm install:*)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(curl -s http://localhost:3000/tutor -o /dev/null -w \"%{http_code}\\\\n\")"
     ]
   }
 }
