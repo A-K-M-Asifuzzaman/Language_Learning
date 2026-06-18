@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n 'content={<Custom' src/features/dashboard/components/widgets/*.tsx)",
+      "Bash(npx tsc:*)",
+      "Bash(curl -s http://localhost:3000/dashboard -o /dev/null -w \"%{http_code}\")",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3000/dashboard -o /dev/null -w \"%{http_code}\\\\n\")"
+    ]
+  }
+}
