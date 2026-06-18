@@ -108,6 +108,49 @@ export function exponentialWeightedAverage(
   return Math.round(current * (1 - alpha) + newScore * alpha);
 }
 
+// ─── Quiz types ───────────────────────────────────────────────────────────────
+
+export interface GrammarQuestion {
+  questionId: string;
+  question: string;
+  options: string[];     // exactly 4 options
+  correctIndex: number;  // 0-based
+  explanation: string;
+  hint?: string;
+}
+
+/** Firestore document — a cached quiz for one category + difficulty */
+export interface GrammarQuizDoc {
+  id: string;
+  category: GrammarCategory;
+  difficulty: GrammarDifficulty;
+  questions: GrammarQuestion[];
+  generatedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface QuestionResult {
+  questionId: string;
+  question: string;
+  options: string[];
+  selectedIndex: number | null;
+  correctIndex: number;
+  isCorrect: boolean;
+  explanation: string;
+}
+
+export interface QuizResult {
+  category: GrammarCategory;
+  difficulty: GrammarDifficulty;
+  score: number;
+  questionsTotal: number;
+  questionsCorrect: number;
+  timeSeconds: number;
+  completedAt: string;
+  questionResults: QuestionResult[];
+}
+
 // ─── Store state ──────────────────────────────────────────────────────────────
 
 export interface GrammarState {

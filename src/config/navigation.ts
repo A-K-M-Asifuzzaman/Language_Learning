@@ -3,6 +3,7 @@ import {
   BookMarked,
   BotMessageSquare,
   ChartBar,
+  FlaskConical,
   LayoutDashboard,
   Settings,
   Trophy,
@@ -40,6 +41,12 @@ export const navItems: NavItem[] = [
     href: "/vocabulary",
     icon: BookMarked,
     description: "Build and review your word library",
+  },
+  {
+    label: "Grammar Lab",
+    href: "/grammar",
+    icon: FlaskConical,
+    description: "AI-powered grammar quizzes",
   },
   {
     label: "Progress",
