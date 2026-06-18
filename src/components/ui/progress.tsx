@@ -59,7 +59,7 @@ const progressFillVariants = cva(
 );
 
 export interface ProgressProps
-  extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>,
+  extends Omit<React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>, "color">,
     VariantProps<typeof progressTrackVariants>,
     VariantProps<typeof progressFillVariants> {
   value?: number;

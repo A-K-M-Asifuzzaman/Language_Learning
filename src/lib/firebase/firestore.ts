@@ -21,6 +21,7 @@ import type {
   OrderByDirection,
   QueryConstraint,
   WhereFilterOp,
+  WithFieldValue,
 } from "firebase/firestore";
 
 import { firebaseApp } from "./config";
@@ -73,7 +74,7 @@ export async function createDocument<T extends DocumentData>(
     ...data,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-  });
+  } as unknown as WithFieldValue<T>);
   return docRef.id;
 }
 
@@ -87,7 +88,7 @@ export async function setDocument<T extends DocumentData>(
     ...data,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-  } as T);
+  } as unknown as WithFieldValue<T>);
 }
 
 export async function updateDocument<T extends DocumentData>(

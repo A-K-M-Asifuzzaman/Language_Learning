@@ -5,6 +5,8 @@ export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000
 export const COLLECTIONS = {
   USERS: "users",
   LESSONS: "lessons",
+  VOCABULARY: "vocabulary",
+  QUIZZES: "quizzes",
   PROGRESS: "progress",
   SESSIONS: "sessions",
 } as const;
