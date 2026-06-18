@@ -62,6 +62,10 @@ const initialVocabularyState: Omit<
   | "getDueWords"
   | "recomputeCounters"
   | "resetAll"
+  | "toggleFavorite"
+  | "setDifficulty"
+  | "setAIExamples"
+  | "updateWordMeta"
 > = {
   words: {},
   currentSession: null,
@@ -204,6 +208,53 @@ export const useVocabularyStore = create<VocabularyState>()(
         // ── recomputeCounters ─────────────────────────────────────────────
         recomputeCounters: () => {
           set((state) => computeCounters(state.words));
+        },
+
+        // ── toggleFavorite ────────────────────────────────────────────────
+        toggleFavorite: (wordId: string) => {
+          set((state) => {
+            const word = state.words[wordId];
+            if (!word) return state;
+            return {
+              words: {
+                ...state.words,
+                [wordId]: { ...word, isFavorite: !word.isFavorite },
+              },
+            };
+          });
+        },
+
+        // ── setDifficulty ─────────────────────────────────────────────────
+        setDifficulty: (wordId: string, difficulty: 1 | 2 | 3 | 4 | 5) => {
+          set((state) => {
+            const word = state.words[wordId];
+            if (!word) return state;
+            return {
+              words: { ...state.words, [wordId]: { ...word, difficulty } },
+            };
+          });
+        },
+
+        // ── setAIExamples ─────────────────────────────────────────────────
+        setAIExamples: (wordId: string, examples: string[]) => {
+          set((state) => {
+            const word = state.words[wordId];
+            if (!word) return state;
+            return {
+              words: { ...state.words, [wordId]: { ...word, aiExamples: examples } },
+            };
+          });
+        },
+
+        // ── updateWordMeta ────────────────────────────────────────────────
+        updateWordMeta: (wordId, updates) => {
+          set((state) => {
+            const word = state.words[wordId];
+            if (!word) return state;
+            return {
+              words: { ...state.words, [wordId]: { ...word, ...updates } },
+            };
+          });
         },
 
         // ── resetAll ──────────────────────────────────────────────────────

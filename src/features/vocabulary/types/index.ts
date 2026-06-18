@@ -43,6 +43,14 @@ export interface VocabularyWord {
   category: WordCategory;
   tags: string[];
   imageUrl?: string;
+  /** Concise dictionary-style definition */
+  definition?: string;
+  /** 1 = very easy, 5 = very hard */
+  difficulty?: 1 | 2 | 3 | 4 | 5;
+  /** Saved to favorites by the user */
+  isFavorite?: boolean;
+  /** AI-generated example sentences */
+  aiExamples?: string[];
 
   // ── Learning status ────────────────────────────────────────────────────
   status: VocabularyStatus;
@@ -227,4 +235,12 @@ export interface VocabularyState {
   getDueWords: () => VocabularyWord[];
   recomputeCounters: () => void;
   resetAll: () => void;
+  // ── Meta updates ──────────────────────────────────────────────────────
+  toggleFavorite: (wordId: string) => void;
+  setDifficulty: (wordId: string, difficulty: 1 | 2 | 3 | 4 | 5) => void;
+  setAIExamples: (wordId: string, examples: string[]) => void;
+  updateWordMeta: (
+    wordId: string,
+    updates: Partial<Pick<VocabularyWord, "definition" | "pronunciation" | "exampleSentence" | "exampleTranslation" | "tags" | "isFavorite" | "difficulty" | "aiExamples">>
+  ) => void;
 }

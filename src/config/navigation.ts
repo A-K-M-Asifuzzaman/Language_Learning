@@ -1,5 +1,6 @@
 import {
   BookOpen,
+  BookMarked,
   BotMessageSquare,
   ChartBar,
   LayoutDashboard,
@@ -33,6 +34,12 @@ export const navItems: NavItem[] = [
     href: "/tutor",
     icon: BotMessageSquare,
     description: "Chat with your AI English tutor",
+  },
+  {
+    label: "Vocabulary",
+    href: "/vocabulary",
+    icon: BookMarked,
+    description: "Build and review your word library",
   },
   {
     label: "Progress",
