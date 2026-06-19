@@ -5,6 +5,7 @@ import {
   ChartBar,
   FlaskConical,
   LayoutDashboard,
+  Mic2,
   PenLine,
   Settings,
   Trophy,
@@ -54,6 +55,12 @@ export const navItems: NavItem[] = [
     href: "/writing",
     icon: PenLine,
     description: "AI writing assistant",
+  },
+  {
+    label: "Speaking",
+    href: "/speaking",
+    icon: Mic2,
+    description: "Voice practice with AI feedback",
   },
   {
     label: "Progress",
