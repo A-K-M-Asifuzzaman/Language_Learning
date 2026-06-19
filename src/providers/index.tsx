@@ -1,9 +1,9 @@
 "use client";
 
-import { useAuthListener } from "@/features/auth/hooks/use-auth";
-
 import { QueryProvider } from "./query-provider";
 import { ThemeProvider } from "./theme-provider";
+
+import { useAuthListener } from "@/features/auth/hooks/use-auth";
 
 interface ProvidersProps {
   children: React.ReactNode;

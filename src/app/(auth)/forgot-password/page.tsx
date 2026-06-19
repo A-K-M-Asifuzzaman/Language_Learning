@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { ArrowLeft, CheckCircle2, Loader2, Mail } from "lucide-react";
 import Link from "next/link";
-import { Mail, Loader2, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
 
 import { sendResetEmail } from "@/features/auth/services/auth-service";
 

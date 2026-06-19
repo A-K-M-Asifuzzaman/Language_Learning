@@ -1,12 +1,5 @@
+import { BookMarked, BotMessageSquare, FlaskConical, Mic2, PenLine, Zap } from "lucide-react";
 import type { Metadata } from "next";
-import {
-  BookMarked,
-  FlaskConical,
-  Mic2,
-  PenLine,
-  BotMessageSquare,
-  Zap,
-} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Authentication",

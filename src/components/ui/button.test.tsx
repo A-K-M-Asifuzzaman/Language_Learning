@@ -1,8 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { Button } from "./button";
+
 import { render, screen } from "@/test/test-utils";
 
-import { Button } from "./button";
 
 describe("Button", () => {
   it("renders with children", () => {
@@ -12,10 +13,8 @@ describe("Button", () => {
 
   it("calls onClick when clicked", async () => {
     const onClick = vi.fn();
-    const { user } = render(<Button onClick={onClick}>Click</Button>);
-    // @testing-library/user-event is available via global setup
+    render(<Button onClick={onClick}>Click</Button>);
     await screen.getByRole("button").click();
-    // Use fireEvent alternative since user isn't in render return
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 

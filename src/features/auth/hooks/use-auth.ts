@@ -2,6 +2,7 @@
 
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 import { auth } from "../services/auth-service";
 import { useAuthStore } from "../store/auth-store";
@@ -36,9 +37,11 @@ export function useAuthListener() {
 
 /** Read-only access to the current auth state */
 export function useAuth() {
-  return useAuthStore((s) => ({
-    user: s.user,
-    isLoading: s.isLoading,
-    isAuthenticated: s.isAuthenticated,
-  }));
+  return useAuthStore(
+    useShallow((s) => ({
+      user: s.user,
+      isLoading: s.isLoading,
+      isAuthenticated: s.isAuthenticated,
+    }))
+  );
 }

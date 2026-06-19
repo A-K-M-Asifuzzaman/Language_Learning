@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Check, Chrome, Eye, EyeOff, Loader2, Lock, Mail, User } from "lucide-react";
 import Link from "next/link";
-import { Eye, EyeOff, Loader2, Mail, Lock, User, Chrome, Check } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-import { registerWithEmail, loginWithGoogle } from "../services/auth-service";
+import { loginWithGoogle, registerWithEmail } from "../services/auth-service";
 
 // ─── Error messages ───────────────────────────────────────────────────────────
 

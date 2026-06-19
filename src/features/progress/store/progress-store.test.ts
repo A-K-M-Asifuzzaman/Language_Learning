@@ -1,8 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { useProgressStore } from "./progress-store";
+
 import { XP_LEVEL_THRESHOLDS } from "@/features/progress/types";
 
-import { useProgressStore } from "./progress-store";
 
 // ─── Setup ────────────────────────────────────────────────────────────────────
 

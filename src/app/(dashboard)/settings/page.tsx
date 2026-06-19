@@ -1,20 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import {
-  User,
-  Bell,
-  Palette,
-  Shield,
-  Target,
-  Globe,
-  Check,
-  Loader2,
-  Mail,
-  LogOut,
-} from "lucide-react";
+import { Bell, Check, Globe, Loader2, LogOut, Mail, Palette, Shield, Target, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
+import { useState } from "react";
 
 import { useAuth } from "@/features/auth/hooks/use-auth";
 import { logout } from "@/features/auth/services/auth-service";

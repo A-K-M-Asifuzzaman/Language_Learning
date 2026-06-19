@@ -73,6 +73,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${fontSans.variable} ${fontMono.variable} min-h-screen bg-background font-sans antialiased`}
       >
         <Providers>{children}</Providers>

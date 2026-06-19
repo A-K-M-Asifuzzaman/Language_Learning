@@ -1,16 +1,16 @@
 "use client";
 
+import {
+  BookOpen,
+  ChevronDown,
+  LogOut,
+  Menu,
+  Settings,
+  User,
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import {
-  LogOut,
-  Settings,
-  User,
-  ChevronDown,
-  BookOpen,
-  Menu,
-} from "lucide-react";
 
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { siteConfig } from "@/config/site";
@@ -44,6 +44,29 @@ function UserAvatar({ photoURL, displayName }: { photoURL?: string | null; displ
 }
 
 // ─── User menu ────────────────────────────────────────────────────────────────
+
+function MenuLink({
+  href,
+  icon,
+  onClick,
+  children,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+    >
+      <span className="text-muted-foreground">{icon}</span>
+      {children}
+    </Link>
+  );
+}
 
 function UserMenu() {
   const router = useRouter();
@@ -84,7 +107,7 @@ function UserMenu() {
         aria-haspopup="true"
       >
         <UserAvatar photoURL={user.photoURL} displayName={user.displayName} />
-        <span className="hidden text-sm font-medium text-foreground sm:block max-w-[120px] truncate">
+        <span className="hidden max-w-[120px] truncate text-sm font-medium text-foreground sm:block">
           {user.displayName ?? user.email}
         </span>
         <ChevronDown
@@ -94,33 +117,23 @@ function UserMenu() {
 
       {open && (
         <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setOpen(false)}
-          />
-
-          {/* Dropdown */}
-          <div className="absolute right-0 top-full z-50 mt-1.5 w-56 rounded-xl border border-border bg-popover p-1 shadow-elevated animate-scale-in">
-            {/* User info */}
+          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+          <div className="absolute right-0 top-full z-50 mt-1.5 w-56 animate-scale-in rounded-xl border border-border bg-popover p-1 shadow-elevated">
             <div className="px-3 py-2 mb-1">
-              <p className="text-sm font-medium text-foreground truncate">{user.displayName}</p>
-              <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+              <p className="truncate text-sm font-medium text-foreground">{user.displayName}</p>
+              <p className="truncate text-xs text-muted-foreground">{user.email}</p>
             </div>
-            <div className="border-t border-border my-1" />
-
+            <div className="my-1 border-t border-border" />
             <MenuLink href="/dashboard" icon={<BookOpen className="h-4 w-4" />} onClick={() => setOpen(false)}>
               Dashboard
             </MenuLink>
             <MenuLink href="/settings" icon={<Settings className="h-4 w-4" />} onClick={() => setOpen(false)}>
               Settings
             </MenuLink>
-            <MenuLink href="/settings/profile" icon={<User className="h-4 w-4" />} onClick={() => setOpen(false)}>
+            <MenuLink href="/settings" icon={<User className="h-4 w-4" />} onClick={() => setOpen(false)}>
               Profile
             </MenuLink>
-
-            <div className="border-t border-border my-1" />
-
+            <div className="my-1 border-t border-border" />
             <button
               onClick={handleSignOut}
               className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
@@ -135,30 +148,7 @@ function UserMenu() {
   );
 }
 
-function MenuLink({
-  href,
-  icon,
-  onClick,
-  children,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-    >
-      <span className="text-muted-foreground">{icon}</span>
-      {children}
-    </Link>
-  );
-}
-
-// ─── Mobile menu trigger (passed to sidebar) ─────────────────────────────────
+// ─── Header ───────────────────────────────────────────────────────────────────
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -168,7 +158,6 @@ export function Header({ onMenuClick }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center gap-3 px-4 sm:px-6">
-        {/* Mobile menu button */}
         <button
           onClick={onMenuClick}
           className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:hidden"
@@ -177,7 +166,6 @@ export function Header({ onMenuClick }: HeaderProps) {
           <Menu className="h-5 w-5" />
         </button>
 
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-semibold text-foreground">
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">
             L

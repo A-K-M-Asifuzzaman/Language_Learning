@@ -1,4 +1,5 @@
 import {
+  Award,
   BookOpen,
   BookMarked,
   BotMessageSquare,
@@ -73,6 +74,12 @@ export const navItems: NavItem[] = [
     href: "/achievements",
     icon: Trophy,
     description: "View your badges and milestones",
+  },
+  {
+    label: "Certificates",
+    href: "/certificates",
+    icon: Award,
+    description: "Earn CEFR certificates for your progress",
   },
   {
     label: "Settings",

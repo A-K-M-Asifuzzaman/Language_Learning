@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { useGrammarStore } from "./grammar-store";
 import type { GrammarAttemptInput, GrammarTopicInput } from "../types";
+
+import { useGrammarStore } from "./grammar-store";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 

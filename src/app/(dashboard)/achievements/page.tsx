@@ -1,25 +1,13 @@
 "use client";
 
+import { Award, BookMarked, Flame, FlaskConical, Lock, Mic2, PenLine, Star, Target, Trophy, Zap } from "lucide-react";
 import { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
-import {
-  Trophy,
-  Flame,
-  BookMarked,
-  FlaskConical,
-  Mic2,
-  PenLine,
-  Star,
-  Zap,
-  Target,
-  Award,
-  Lock,
-} from "lucide-react";
 
+import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
 import { useProgressStore, selectLevelInfo, selectTotalXP } from "@/features/progress/store/progress-store";
 import { useStreakStore, selectCurrentStreak, selectLongestStreak } from "@/features/streak/store/streak-store";
 import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
-import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
 import { cn } from "@/lib/utils";
 
 // ─── Achievement definition ───────────────────────────────────────────────────
@@ -297,17 +285,6 @@ export default function AchievementsPage() {
 
   const earned = achievements.filter((a) => a.earned);
   const locked = achievements.filter((a) => !a.earned);
-
-  const CATEGORIES = [
-    { key: "all",        label: "All" },
-    { key: "streak",     label: "Streak" },
-    { key: "xp",        label: "XP" },
-    { key: "level",     label: "Level" },
-    { key: "vocabulary",label: "Vocabulary" },
-    { key: "grammar",   label: "Grammar" },
-    { key: "speaking",  label: "Speaking" },
-    { key: "writing",   label: "Writing" },
-  ] as const;
 
   return (
     <div className="flex flex-col gap-8">

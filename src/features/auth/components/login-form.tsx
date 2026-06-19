@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Eye, EyeOff, Loader2, Mail, Lock, Chrome } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { loginWithEmail, loginWithGoogle } from "../services/auth-service";
 import type { AuthErrorCode } from "../types";

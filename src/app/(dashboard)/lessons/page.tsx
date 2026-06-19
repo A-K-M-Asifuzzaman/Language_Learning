@@ -1,16 +1,6 @@
+import { ArrowRight, BotMessageSquare, BookMarked, Clock, FlaskConical, Mic2, PenLine, Star, Zap } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  BookMarked,
-  FlaskConical,
-  Mic2,
-  PenLine,
-  BotMessageSquare,
-  ArrowRight,
-  Zap,
-  Star,
-  Clock,
-} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Lessons",

@@ -1,18 +1,9 @@
+import { ArrowRight, BookMarked, BotMessageSquare, ChartBar, CheckCircle2, Flame, FlaskConical, Mic2, PenLine, Star, Zap } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  BookMarked,
-  FlaskConical,
-  Mic2,
-  PenLine,
-  BotMessageSquare,
-  ChartBar,
-  ArrowRight,
-  Zap,
-  Flame,
-  Star,
-  CheckCircle2,
-} from "lucide-react";
+
+import { LandingHeroCta } from "./landing-hero-cta";
+import { LandingNav } from "./landing-nav";
 
 export const metadata: Metadata = {
   title: "Language Learning — Practice English with AI",
@@ -83,30 +74,7 @@ export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       {/* Nav */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center gap-2 font-semibold text-foreground">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">
-              L
-            </div>
-            Language Learning
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/register"
-              className="rounded-lg bg-primary px-4 py-1.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.98]"
-            >
-              Get started free
-            </Link>
-          </div>
-        </div>
-      </header>
+      <LandingNav />
 
       {/* Hero */}
       <section className="mx-auto flex w-full max-w-6xl flex-col items-center gap-8 px-4 py-20 text-center sm:px-6 sm:py-28">
@@ -119,7 +87,7 @@ export default function HomePage() {
         <div className="flex flex-col gap-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Learn English{" "}
-            <span className="bg-gradient-brand bg-clip-text text-transparent">
+            <span className="text-gradient-brand">
               faster with AI
             </span>
           </h1>
@@ -129,21 +97,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/register"
-            className="flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-glow-violet active:scale-[0.98]"
-          >
-            Start for free
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/dashboard"
-            className="flex items-center justify-center gap-2 rounded-xl border border-input bg-background px-6 py-3 text-sm font-medium text-foreground transition-all hover:bg-accent active:scale-[0.98]"
-          >
-            View dashboard
-          </Link>
-        </div>
+        <LandingHeroCta />
 
         {/* Perks */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
@@ -236,10 +190,10 @@ export default function HomePage() {
           Join now and practise English with AI feedback every single day.
         </p>
         <Link
-          href="/register"
+          href="/dashboard"
           className="flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-glow-violet active:scale-[0.98]"
         >
-          Create free account
+          Get started
           <ArrowRight className="h-4 w-4" />
         </Link>
       </section>

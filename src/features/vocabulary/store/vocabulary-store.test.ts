@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { useVocabularyStore } from "./vocabulary-store";
 import type { VocabularyWordInput } from "../types";
+
+import { useVocabularyStore } from "./vocabulary-store";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
