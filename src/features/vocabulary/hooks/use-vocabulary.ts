@@ -8,17 +8,18 @@ import {
   type UseQueryResult,
 } from "@tanstack/react-query";
 
-import { vocabularyKeys, type VocabularyListFilters } from "@/lib/firebase/query-keys";
-import { QUERY_STALE_TIME } from "@/lib/constants";
-import { useDebounce } from "@/hooks/use-debounce";
-
+import { vocabularyService } from "../services/vocabulary-service";
 import type {
   CreateVocabularyEntryInput,
   UpdateVocabularyEntryInput,
   VocabularyEntry,
   VocabularyEntryFilters,
 } from "../types/firestore";
-import { vocabularyService } from "../services/vocabulary-service";
+
+import { useDebounce } from "@/hooks/use-debounce";
+import { QUERY_STALE_TIME } from "@/lib/constants";
+import { vocabularyKeys, type VocabularyListFilters } from "@/lib/firebase/query-keys";
+
 
 /* ============================================================================
    Vocabulary catalog hooks

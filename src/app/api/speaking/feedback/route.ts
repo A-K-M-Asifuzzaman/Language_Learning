@@ -1,8 +1,8 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
+import type { SpeakingScenario } from "@/features/speaking/types";
 import { genAI, GEMINI_MODEL } from "@/lib/gemini";
 import { checkRateLimit } from "@/lib/rate-limit";
-import type { SpeakingScenario } from "@/features/speaking/types";
 
 // ─── Route handler ────────────────────────────────────────────────────────────
 
@@ -91,8 +91,7 @@ Scoring guide (be realistic — most learners score 40-75):
 
     const feedback = JSON.parse(cleaned) as Record<string, unknown>;
     return Response.json(feedback);
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : "AI analysis failed";
-    return Response.json({ error: msg }, { status: 500 });
+  } catch {
+    return Response.json({ error: "AI analysis failed. Please try again." }, { status: 500 });
   }
 }

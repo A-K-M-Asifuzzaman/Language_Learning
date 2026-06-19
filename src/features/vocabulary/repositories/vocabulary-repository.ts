@@ -7,17 +7,18 @@ import {
   type FirestoreDataConverter,
 } from "firebase/firestore";
 
-import { COLLECTIONS } from "@/lib/constants";
-import { createConverter } from "@/lib/firebase/converters";
-import { normalizeError } from "@/lib/firebase/errors";
-import { BaseRepository } from "@/lib/firebase/base-repository";
-
 import type {
   CreateVocabularyEntryInput,
   UpdateVocabularyEntryInput,
   VocabularyEntry,
   VocabularyEntryFilters,
 } from "../types/firestore";
+
+import { COLLECTIONS } from "@/lib/constants";
+import { BaseRepository } from "@/lib/firebase/base-repository";
+import { createConverter } from "@/lib/firebase/converters";
+import { normalizeError } from "@/lib/firebase/errors";
+
 
 /* ============================================================================
    VocabularyRepository — /vocabulary collection (word catalog)

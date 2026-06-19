@@ -1,9 +1,9 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
-import { genAI, GEMINI_MODEL } from "@/lib/gemini";
-import { checkRateLimit } from "@/lib/rate-limit";
 import { ACTION_PROMPTS } from "@/features/writing/types";
 import type { WritingAction } from "@/features/writing/types";
+import { genAI, GEMINI_MODEL } from "@/lib/gemini";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 // ─── Route handler ────────────────────────────────────────────────────────────
 
@@ -57,9 +57,8 @@ export async function POST(req: NextRequest) {
             controller.enqueue(encoder.encode(chunkText));
           }
         }
-      } catch (err) {
-        const msg = err instanceof Error ? err.message : "AI request failed";
-        controller.enqueue(encoder.encode(`__ERROR__:${msg}`));
+      } catch {
+        controller.enqueue(encoder.encode("__ERROR__:AI request failed. Please try again."));
       } finally {
         controller.close();
       }

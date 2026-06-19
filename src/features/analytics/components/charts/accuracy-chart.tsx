@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { useShallow } from "zustand/react/shallow";
 import {
   LineChart,
   Line,
@@ -13,13 +12,8 @@ import {
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
+import { useShallow } from "zustand/react/shallow";
 
-import {
-  useGrammarStore,
-  selectRecentAttempts,
-} from "@/features/grammar/store/grammar-store";
-import { useVocabularyStore } from "@/features/vocabulary/store/vocabulary-store";
-import type { VocabularyState } from "@/features/vocabulary/types";
 import {
   CHART_COLORS,
   GRID_COLOR,
@@ -27,6 +21,14 @@ import {
   ChartTooltip,
   ChartEmpty,
 } from "../chart-utils";
+
+import {
+  useGrammarStore,
+  selectRecentAttempts,
+} from "@/features/grammar/store/grammar-store";
+import { useVocabularyStore } from "@/features/vocabulary/store/vocabulary-store";
+import type { VocabularyState } from "@/features/vocabulary/types";
+
 
 // ─── Vocab selector ───────────────────────────────────────────────────────────
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { useShallow } from "zustand/react/shallow";
 import {
   PieChart,
   Pie,
@@ -10,10 +9,13 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import { useShallow } from "zustand/react/shallow";
+
+import { CHART_COLORS, TICK_COLOR, ChartTooltip, ChartEmpty } from "../chart-utils";
 
 import { useVocabularyStore } from "@/features/vocabulary/store/vocabulary-store";
-import { CHART_COLORS, TICK_COLOR, ChartTooltip, ChartEmpty } from "../chart-utils";
 import type { VocabularyState } from "@/features/vocabulary/types";
+
 
 // ─── Selector ─────────────────────────────────────────────────────────────────
 

@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, Trash2, Volume2, BookOpen, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
+import { useState } from "react";
 
-import { cn } from "@/lib/utils";
 import { useVocabularyStore } from "../store/vocabulary-store";
 import type { VocabularyWord } from "../types";
+
+import { cn } from "@/lib/utils";
 
 // ─── Status + difficulty helpers ──────────────────────────────────────────────
 
@@ -74,7 +75,7 @@ function AIExamplesButton({ word }: { word: VocabularyWord }) {
           : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground",
         loading && "animate-pulse"
       )}
-      title={hasExamples ? "Regenerate AI examples" : "Generate AI examples"}
+      title={error ?? (hasExamples ? "Regenerate AI examples" : "Generate AI examples")}
     >
       <Sparkles className="h-3 w-3" />
       {loading ? "Generating…" : hasExamples ? "Regenerate" : "AI Examples"}

@@ -1,3 +1,4 @@
+import { quizRepository, type IQuizRepository } from "../repositories/quiz-repository";
 import type {
   CreateQuestionInput,
   CreateQuizInput,
@@ -11,7 +12,6 @@ import type {
   UpdateQuizInput,
 } from "../types";
 import { gradeQuiz } from "../types";
-import { quizRepository, type IQuizRepository } from "../repositories/quiz-repository";
 
 /* ============================================================================
    QuizService — business logic for quizzes

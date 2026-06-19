@@ -46,7 +46,7 @@ function upsertTodayInHistory(
 /** Ensure all days in the last 30 days appear in history with the correct status. */
 function fillHistoryGaps(
   history: StreakDay[],
-  lastActiveDate: string | null
+  _lastActiveDate: string | null
 ): StreakDay[] {
   const days = lastNDays(HISTORY_DAYS);
   const historyMap = Object.fromEntries(history.map((d) => [d.date, d]));

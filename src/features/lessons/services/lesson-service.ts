@@ -1,6 +1,4 @@
-import { STORAGE_PATHS } from "@/lib/constants";
-import { uploadFile, deleteFile } from "@/lib/firebase/storage";
-
+import { lessonRepository, type ILessonRepository } from "../repositories/lesson-repository";
 import type {
   CreateLessonInput,
   CreateSectionInput,
@@ -11,7 +9,10 @@ import type {
   UpdateLessonInput,
   UpdateSectionInput,
 } from "../types";
-import { lessonRepository, type ILessonRepository } from "../repositories/lesson-repository";
+
+import { STORAGE_PATHS } from "@/lib/constants";
+import { uploadFile, deleteFile } from "@/lib/firebase/storage";
+
 
 /* ============================================================================
    LessonService — business logic layer for lessons

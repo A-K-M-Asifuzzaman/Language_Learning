@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import {
   useMutation,
   useQuery,
@@ -8,10 +7,9 @@ import {
   type UseMutationResult,
   type UseQueryResult,
 } from "@tanstack/react-query";
+import { useEffect } from "react";
 
-import { lessonKeys, type LessonListFilters } from "@/lib/firebase/query-keys";
-import { QUERY_STALE_TIME } from "@/lib/constants";
-
+import { lessonService } from "../services/lesson-service";
 import type {
   CreateLessonInput,
   CreateSectionInput,
@@ -21,7 +19,10 @@ import type {
   UpdateLessonInput,
   UpdateSectionInput,
 } from "../types";
-import { lessonService } from "../services/lesson-service";
+
+import { QUERY_STALE_TIME } from "@/lib/constants";
+import { lessonKeys, type LessonListFilters } from "@/lib/firebase/query-keys";
+
 
 /* ============================================================================
    Lesson hooks — React Query wrappers around LessonService

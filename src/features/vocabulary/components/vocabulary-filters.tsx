@@ -1,11 +1,12 @@
 "use client";
 
-import { Search, X, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { Search, X } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { WORD_CATEGORIES } from "../constants";
 import type { VocabularyStatus, WordCategory } from "../types";
+
+import { cn } from "@/lib/utils";
 
 // ─── Search bar ───────────────────────────────────────────────────────────────
 

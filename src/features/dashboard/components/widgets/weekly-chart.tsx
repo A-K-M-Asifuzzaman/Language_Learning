@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme } from "next-themes";
 import {
   Bar,
   BarChart,
@@ -11,14 +12,12 @@ import {
   type TooltipContentProps,
 } from "recharts";
 import type { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
-import { useTheme } from "next-themes";
-
 import { useShallow } from "zustand/react/shallow";
 
-import { useDashboardStore, selectWeeklyActivity } from "@/features/dashboard/store/dashboard-store";
-import { useStreakStore, selectWeekHistory } from "@/features/streak/store/streak-store";
 import { EmptyData } from "@/components/ui/empty-state";
 import { SkeletonCard } from "@/components/ui/skeleton";
+import { useDashboardStore, selectWeeklyActivity } from "@/features/dashboard/store/dashboard-store";
+import { useStreakStore, selectWeekHistory } from "@/features/streak/store/streak-store";
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────
 

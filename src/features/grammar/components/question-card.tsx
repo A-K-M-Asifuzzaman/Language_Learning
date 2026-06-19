@@ -3,8 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, XCircle, Lightbulb } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import type { GrammarQuestion } from "../types";
+
+import { cn } from "@/lib/utils";
 
 interface QuestionCardProps {
   question: GrammarQuestion;

@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutGrid, History, BookOpen, Clock, Target } from "lucide-react";
+import { LayoutGrid, History, Clock, Target } from "lucide-react";
+import { useState } from "react";
 
-import { cn } from "@/lib/utils";
+
+import { GRAMMAR_TOPICS } from "../constants";
 import { useGrammarStore } from "../store/grammar-store";
-import { GRAMMAR_TOPICS, GRADE_CONFIG, DIFFICULTY_CONFIG } from "../constants";
+import type { GrammarCategory, GrammarDifficulty } from "../types";
+
+import { QuizSession } from "./quiz-session";
 import { StatsHeader } from "./stats-header";
 import { TopicCard, DifficultyModal } from "./topic-card";
-import { QuizSession } from "./quiz-session";
-import type { GrammarCategory, GrammarDifficulty } from "../types";
+
+import { cn } from "@/lib/utils";
 
 // ─── Tab types ────────────────────────────────────────────────────────────────
 

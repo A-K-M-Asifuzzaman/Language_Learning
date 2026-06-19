@@ -62,8 +62,7 @@ Example format: First sentence here | Second sentence here | Third sentence here
     }
 
     return Response.json({ examples });
-  } catch (err) {
-    const message = err instanceof Error ? err.message : "Gemini error.";
-    return Response.json({ error: message }, { status: 500 });
+  } catch {
+    return Response.json({ error: "Failed to generate examples. Please try again." }, { status: 500 });
   }
 }

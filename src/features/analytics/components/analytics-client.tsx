@@ -1,26 +1,27 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useShallow } from "zustand/react/shallow";
 import {
   Flame, Star, BookMarked, FlaskConical, Mic2, TrendingUp,
 } from "lucide-react";
+import { useShallow } from "zustand/react/shallow";
 
-import { cn } from "@/lib/utils";
-import { useStreakStore, selectCurrentStreak, selectLongestStreak } from "@/features/streak/store/streak-store";
-import { useProgressStore, selectTotalXP, selectLevelInfo } from "@/features/progress/store/progress-store";
-import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
-import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
-import { useSpeakingStore, selectOverallScore as selectSpeakingScore, selectTotalSessions } from "@/features/speaking/store/speaking-store";
 
 import { ChartCard } from "./chart-card";
-import { WeeklyActivityChart } from "./charts/weekly-activity-chart";
+import { AccuracyChart } from "./charts/accuracy-chart";
+import { GrammarRadarChart } from "./charts/grammar-radar-chart";
+import { MonthlyImprovementsChart } from "./charts/monthly-improvements-chart";
 import { StreakHeatmapChart } from "./charts/streak-heatmap-chart";
 import { VocabularyDonutChart } from "./charts/vocabulary-donut-chart";
-import { GrammarRadarChart } from "./charts/grammar-radar-chart";
-import { AccuracyChart } from "./charts/accuracy-chart";
+import { WeeklyActivityChart } from "./charts/weekly-activity-chart";
 import { XPTimelineChart } from "./charts/xp-timeline-chart";
-import { MonthlyImprovementsChart } from "./charts/monthly-improvements-chart";
+
+import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
+import { useProgressStore, selectTotalXP, selectLevelInfo } from "@/features/progress/store/progress-store";
+import { useSpeakingStore, selectOverallScore as selectSpeakingScore, selectTotalSessions } from "@/features/speaking/store/speaking-store";
+import { useStreakStore, selectCurrentStreak, selectLongestStreak } from "@/features/streak/store/streak-store";
+import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
+import { cn } from "@/lib/utils";
 
 // ─── KPI stat card ────────────────────────────────────────────────────────────
 

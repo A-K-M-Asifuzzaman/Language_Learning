@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, XCircle, RotateCcw, LayoutGrid, Clock, Zap } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import { computeGrade } from "../types";
 import { GRADE_CONFIG, DIFFICULTY_CONFIG } from "../constants";
+import { computeGrade } from "../types";
 import type { QuizResult } from "../types";
+
+import { cn } from "@/lib/utils";
 
 interface ResultsScreenProps {
   result: QuizResult;

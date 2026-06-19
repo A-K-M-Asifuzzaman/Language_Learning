@@ -1,5 +1,6 @@
 "use client";
 
+import { Sparkles } from "lucide-react";
 import {
   PieChart,
   Pie,
@@ -9,14 +10,12 @@ import {
   type TooltipContentProps,
 } from "recharts";
 import type { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
-import { Sparkles } from "lucide-react";
-
 import { useShallow } from "zustand/react/shallow";
 
-import { useVocabularyStore, selectVocabStats, selectWordsByStatus } from "@/features/vocabulary/store/vocabulary-store";
-import { cn } from "@/lib/utils";
 import { EmptyData } from "@/components/ui/empty-state";
 import { SkeletonCard } from "@/components/ui/skeleton";
+import { useVocabularyStore, selectVocabStats, selectWordsByStatus } from "@/features/vocabulary/store/vocabulary-store";
+import { cn } from "@/lib/utils";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

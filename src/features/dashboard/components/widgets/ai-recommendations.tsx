@@ -1,13 +1,13 @@
 "use client";
 
-import { Sparkles, BookOpen, PenLine, Clock, ChevronRight, BrainCircuit } from "lucide-react";
 import { motion } from "framer-motion";
+import { Sparkles, BookOpen, PenLine, Clock, ChevronRight, BrainCircuit } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 
 import { useGrammarStore, selectAllTopics, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
-import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
 import { useProgressStore, selectLevelInfo } from "@/features/progress/store/progress-store";
 import { useStreakStore, selectTodayProgress } from "@/features/streak/store/streak-store";
+import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
 import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -31,12 +31,6 @@ const PRIORITY_BAR: Record<Priority, string> = {
   high:   "bg-destructive",
   medium: "bg-ds-amber",
   low:    "bg-ds-green",
-};
-
-const PRIORITY_LABEL: Record<Priority, string> = {
-  high:   "High priority",
-  medium: "Suggested",
-  low:    "Great option",
 };
 
 // ─── Single recommendation card ───────────────────────────────────────────────

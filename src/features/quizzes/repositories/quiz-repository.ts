@@ -14,12 +14,6 @@ import {
   type FirestoreDataConverter,
 } from "firebase/firestore";
 
-import { db } from "@/lib/firebase/firestore";
-import { COLLECTIONS } from "@/lib/constants";
-import { createConverter, createSubConverter } from "@/lib/firebase/converters";
-import { normalizeError } from "@/lib/firebase/errors";
-import { BaseRepository } from "@/lib/firebase/base-repository";
-
 import type {
   CreateQuestionInput,
   CreateQuizInput,
@@ -29,6 +23,13 @@ import type {
   UpdateQuestionInput,
   UpdateQuizInput,
 } from "../types";
+
+import { COLLECTIONS } from "@/lib/constants";
+import { BaseRepository } from "@/lib/firebase/base-repository";
+import { createConverter, createSubConverter } from "@/lib/firebase/converters";
+import { normalizeError } from "@/lib/firebase/errors";
+import { db } from "@/lib/firebase/firestore";
+
 
 /* ============================================================================
    QuizRepository — /quizzes collection + questions subcollection

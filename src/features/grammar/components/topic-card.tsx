@@ -1,12 +1,14 @@
 "use client";
 
-import { Play, Lock } from "lucide-react";
 import { motion } from "framer-motion";
+import { Play } from "lucide-react";
+
+
+import { GRADE_CONFIG } from "../constants";
+import { useGrammarStore } from "../store/grammar-store";
+import type { GrammarCategory, GrammarDifficulty } from "../types";
 
 import { cn } from "@/lib/utils";
-import { useGrammarStore } from "../store/grammar-store";
-import { GRADE_CONFIG } from "../constants";
-import type { GrammarCategory, GrammarDifficulty } from "../types";
 
 interface TopicCardProps {
   category: GrammarCategory;
@@ -116,7 +118,7 @@ const DIFFICULTIES: { value: GrammarDifficulty; label: string; desc: string; col
   { value: "hard",   label: "Hard",   desc: "C1–C2 · Advanced",       color: "text-destructive", bg: "bg-destructive/10",border: "border-destructive/30" },
 ];
 
-export function DifficultyModal({ category, label, icon, onStart, onClose }: DifficultyModalProps) {
+export function DifficultyModal({ category: _category, label, icon, onStart, onClose }: DifficultyModalProps) {
   return (
     <>
       {/* Backdrop */}

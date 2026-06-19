@@ -3,13 +3,15 @@
 import { motion } from "framer-motion";
 import { useShallow } from "zustand/react/shallow";
 
-import { cn } from "@/lib/utils";
-import { SCENARIOS } from "../types";
-import type { SpeakingScenario } from "../types";
+
 import {
   useSpeakingStore,
   selectAllScenarioStats,
 } from "../store/speaking-store";
+import { SCENARIOS } from "../types";
+import type { SpeakingScenario } from "../types";
+
+import { cn } from "@/lib/utils";
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 

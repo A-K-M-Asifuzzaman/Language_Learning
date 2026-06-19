@@ -1,6 +1,4 @@
-import type { RecallQuality } from "@/features/vocabulary/types";
-import { applySpacedRepetition } from "@/features/vocabulary/types";
-
+import { progressRepository, type IProgressRepository } from "../repositories/progress-repository";
 import type {
   LessonProgressDoc,
   QuizProgressDoc,
@@ -9,7 +7,10 @@ import type {
   UserProgressSummary,
   VocabProgressDoc,
 } from "../types/firestore";
-import { progressRepository, type IProgressRepository } from "../repositories/progress-repository";
+
+import type { RecallQuality } from "@/features/vocabulary/types";
+import { applySpacedRepetition } from "@/features/vocabulary/types";
+
 
 /* ============================================================================
    ProgressService — coordinates Firestore persistence for all progress types

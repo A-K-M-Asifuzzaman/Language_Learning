@@ -1,15 +1,17 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { PenLine, History, X } from "lucide-react";
+import { useState, useRef, useCallback } from "react";
 
-import { cn } from "@/lib/utils";
 import { WRITING_ACTIONS } from "../types";
 import type { WritingAction, WritingResult } from "../types";
-import { WritingEditor } from "./writing-editor";
+
 import { ActionToolbar, DescriptionBar } from "./action-toolbar";
 import { ResultPanel } from "./result-panel";
+import { WritingEditor } from "./writing-editor";
+
+import { cn } from "@/lib/utils";
 
 // ─── History item ─────────────────────────────────────────────────────────────
 

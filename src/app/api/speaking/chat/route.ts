@@ -1,9 +1,9 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
-import { genAI, GEMINI_MODEL } from "@/lib/gemini";
-import { checkRateLimit } from "@/lib/rate-limit";
 import { SCENARIOS } from "@/features/speaking/types";
 import type { GeminiHistoryItem, SpeakingScenario } from "@/features/speaking/types";
+import { genAI, GEMINI_MODEL } from "@/lib/gemini";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 // ─── Route handler ────────────────────────────────────────────────────────────
 
@@ -75,9 +75,8 @@ export async function POST(req: NextRequest) {
           const text = chunk.text();
           if (text) controller.enqueue(encoder.encode(text));
         }
-      } catch (err) {
-        const msg = err instanceof Error ? err.message : "AI request failed";
-        controller.enqueue(encoder.encode(`__ERROR__:${msg}`));
+      } catch {
+        controller.enqueue(encoder.encode("__ERROR__:AI request failed. Please try again."));
       } finally {
         controller.close();
       }

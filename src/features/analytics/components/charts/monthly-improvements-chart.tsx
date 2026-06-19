@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { useShallow } from "zustand/react/shallow";
 import {
   ComposedChart,
   Bar,
@@ -13,10 +12,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { useShallow } from "zustand/react/shallow";
 
-import { useStreakStore, selectStreakHistory } from "@/features/streak/store/streak-store";
-import { useGrammarStore } from "@/features/grammar/store/grammar-store";
-import type { GrammarState } from "@/features/grammar/types";
 import {
   CHART_COLORS,
   GRID_COLOR,
@@ -24,6 +21,12 @@ import {
   ChartTooltip,
   ChartEmpty,
 } from "../chart-utils";
+
+import { useGrammarStore } from "@/features/grammar/store/grammar-store";
+import type { GrammarState } from "@/features/grammar/types";
+import { useStreakStore, selectStreakHistory } from "@/features/streak/store/streak-store";
+
+
 
 // ─── Grammar selector (returns primitive — no useShallow needed) ──────────────
 

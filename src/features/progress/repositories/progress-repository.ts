@@ -8,13 +8,7 @@ import {
   setDoc,
   updateDoc,
   where,
-  type FirestoreDataConverter,
 } from "firebase/firestore";
-
-import { db } from "@/lib/firebase/firestore";
-import { COLLECTIONS } from "@/lib/constants";
-import { createSubConverter } from "@/lib/firebase/converters";
-import { normalizeError } from "@/lib/firebase/errors";
 
 import type {
   LessonProgressDoc,
@@ -25,6 +19,12 @@ import type {
   UserProgressSummary,
   VocabProgressDoc,
 } from "../types/firestore";
+
+import { COLLECTIONS } from "@/lib/constants";
+import { createSubConverter } from "@/lib/firebase/converters";
+import { normalizeError } from "@/lib/firebase/errors";
+import { db } from "@/lib/firebase/firestore";
+
 
 /* ============================================================================
    ProgressRepository — /progress/{userId} + subcollections

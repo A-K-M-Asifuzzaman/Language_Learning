@@ -1,9 +1,9 @@
 import { headers } from "next/headers";
 import type { NextRequest } from "next/server";
 
+import type { TutorMode, TutorRequest } from "@/features/tutor/types";
 import { getTutorModel } from "@/lib/gemini";
 import { checkRateLimit } from "@/lib/rate-limit";
-import type { TutorMode, TutorRequest } from "@/features/tutor/types";
 
 /* ============================================================================
    System prompts per tutor mode

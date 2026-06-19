@@ -1,16 +1,17 @@
-import { STORAGE_PATHS } from "@/lib/constants";
-import { uploadFile } from "@/lib/firebase/storage";
-
+import {
+  vocabularyRepository,
+  type IVocabularyRepository,
+} from "../repositories/vocabulary-repository";
 import type {
   CreateVocabularyEntryInput,
   UpdateVocabularyEntryInput,
   VocabularyEntry,
   VocabularyEntryFilters,
 } from "../types/firestore";
-import {
-  vocabularyRepository,
-  type IVocabularyRepository,
-} from "../repositories/vocabulary-repository";
+
+import { STORAGE_PATHS } from "@/lib/constants";
+import { uploadFile } from "@/lib/firebase/storage";
+
 
 /* ============================================================================
    VocabularyService — business logic for the word catalog

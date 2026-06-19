@@ -1,19 +1,18 @@
 "use client";
 
-import { useMemo } from "react";
-import { Flame, Snowflake, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { Flame, Snowflake, Trophy } from "lucide-react";
+import { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
 
-import { cn } from "@/lib/utils";
+import { SkeletonCard } from "@/components/ui/skeleton";
 import {
   useStreakStore,
   selectCurrentStreak,
   selectLongestStreak,
 } from "@/features/streak/store/streak-store";
 import { lastNDays, todayDate, type StreakDay, type DayStatus } from "@/features/streak/types";
-import { SkeletonCard } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 // ─── Day pill ─────────────────────────────────────────────────────────────────
 

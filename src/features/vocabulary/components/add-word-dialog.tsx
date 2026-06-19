@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { X, Sparkles, Plus, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { X, Sparkles, Plus, Loader2 } from "lucide-react";
+import { useState } from "react";
+
+import { WORD_CATEGORIES } from "../constants";
+import { useVocabularyStore } from "../store/vocabulary-store";
+import type { VocabularyWordInput, WordCategory } from "../types";
 
 import { cn } from "@/lib/utils";
-import { useVocabularyStore } from "../store/vocabulary-store";
-import { WORD_CATEGORIES } from "../constants";
-import type { VocabularyWordInput, WordCategory } from "../types";
 
 // ─── Small reusable field ─────────────────────────────────────────────────────
 
@@ -46,7 +47,6 @@ function DifficultyPicker({
   value: number;
   onChange: (v: number) => void;
 }) {
-  const labels = ["", "Very Easy", "Easy", "Medium", "Hard", "Very Hard"];
   return (
     <div className="flex items-center gap-2">
       {[1, 2, 3, 4, 5].map((n) => (

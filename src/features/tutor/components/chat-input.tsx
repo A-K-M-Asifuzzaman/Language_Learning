@@ -1,11 +1,13 @@
 "use client";
 
+import { ArrowUp, Square } from "lucide-react";
 import { useRef, useState, useCallback } from "react";
-import { ArrowUp, Square, Paperclip } from "lucide-react";
+
+
+import { useTutorStore, selectActiveMode } from "../store/tutor-store";
+import { TUTOR_MODES } from "../types";
 
 import { cn } from "@/lib/utils";
-import { TUTOR_MODES } from "../types";
-import { useTutorStore, selectActiveMode } from "../store/tutor-store";
 
 interface ChatInputProps {
   onSend: (text: string) => void;

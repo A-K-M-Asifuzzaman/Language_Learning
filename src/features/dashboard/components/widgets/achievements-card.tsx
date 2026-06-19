@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy } from "lucide-react";
 
+import { EmptyData } from "@/components/ui/empty-state";
+import { SkeletonCard } from "@/components/ui/skeleton";
 import {
   useDashboardStore,
   selectRecentAchievements,
@@ -10,8 +12,6 @@ import {
 } from "@/features/dashboard/store/dashboard-store";
 import type { Achievement, AchievementTier } from "@/features/dashboard/types";
 import { cn } from "@/lib/utils";
-import { EmptyData } from "@/components/ui/empty-state";
-import { SkeletonCard } from "@/components/ui/skeleton";
 
 // ─── Tier config ──────────────────────────────────────────────────────────────
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, MicOff, Square } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 

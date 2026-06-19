@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, Copy } from "lucide-react";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 
-import { cn } from "@/lib/utils";
+
 import type { ChatMessage, TutorMode } from "../types";
+
+import { cn } from "@/lib/utils";
 
 // ─── Markdown renderer ────────────────────────────────────────────────────────
 
@@ -124,7 +126,7 @@ interface ChatMessageProps {
   index: number;
 }
 
-export function ChatMessageBubble({ message, isLatest = false, index }: ChatMessageProps) {
+export function ChatMessageBubble({ message, isLatest: _isLatest = false, index }: ChatMessageProps) {
   const isUser = message.role === "user";
   const isEmpty = !message.content && !isUser;
 

@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from "react";
 import { X, ClipboardPaste } from "lucide-react";
+import { useRef, useEffect } from "react";
+
 import { cn } from "@/lib/utils";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

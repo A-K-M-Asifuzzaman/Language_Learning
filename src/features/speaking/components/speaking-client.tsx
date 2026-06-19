@@ -1,22 +1,24 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useShallow } from "zustand/react/shallow";
 import { Mic2, MessageSquare, ChevronLeft, BarChart3, Trophy } from "lucide-react";
+import { useState } from "react";
+import { useShallow } from "zustand/react/shallow";
 
-import { cn } from "@/lib/utils";
-import { SCENARIOS } from "../types";
-import type { SpeakingMode, SpeakingScenario } from "../types";
 import {
   useSpeakingStore,
   selectAllScenarioStats,
   selectOverallScore,
   selectTotalSessions,
 } from "../store/speaking-store";
-import { ScenarioPicker } from "./scenario-picker";
-import { PracticeSession } from "./practice-session";
+import { SCENARIOS } from "../types";
+import type { SpeakingMode, SpeakingScenario } from "../types";
+
 import { ConversationSession } from "./conversation-session";
+import { PracticeSession } from "./practice-session";
+import { ScenarioPicker } from "./scenario-picker";
+
+import { cn } from "@/lib/utils";
 
 // ─── Mode tab ─────────────────────────────────────────────────────────────────
 

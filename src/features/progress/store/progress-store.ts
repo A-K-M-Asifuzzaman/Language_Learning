@@ -38,7 +38,7 @@ const initialProgressState: Omit<
 export const useProgressStore = create<ProgressState>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set, _get) => ({
         ...initialProgressState,
 
         // ── earnXP ────────────────────────────────────────────────────────

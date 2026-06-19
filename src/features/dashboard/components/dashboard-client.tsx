@@ -1,24 +1,24 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
 import { motion } from "framer-motion";
-
+import { Suspense, useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
 
+
+import { AchievementsCard, AchievementsCardSkeleton } from "./widgets/achievements-card";
+import { AIRecommendations } from "./widgets/ai-recommendations";
+import { DailyGoalsCard, DailyGoalsCardSkeleton } from "./widgets/daily-goals-card";
+import { GrammarCard, GrammarCardSkeleton } from "./widgets/grammar-card";
+import { StatCards, StatCardsSkeleton } from "./widgets/stat-cards";
+import { StreakCard, StreakCardSkeleton } from "./widgets/streak-card";
+import { VocabularyCard, VocabularyCardSkeleton } from "./widgets/vocabulary-card";
+import { WeeklyChart, WeeklyChartSkeleton } from "./widgets/weekly-chart";
+
+import { useDashboardStore } from "@/features/dashboard/store/dashboard-store";
+import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
 import { useProgressStore, selectLevelInfo, selectTotalXP } from "@/features/progress/store/progress-store";
 import { useStreakStore, selectCurrentStreak, selectLongestStreak, selectTodayProgress } from "@/features/streak/store/streak-store";
 import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
-import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
-import { useDashboardStore } from "@/features/dashboard/store/dashboard-store";
-
-import { StatCards, StatCardsSkeleton } from "./widgets/stat-cards";
-import { DailyGoalsCard, DailyGoalsCardSkeleton } from "./widgets/daily-goals-card";
-import { StreakCard, StreakCardSkeleton } from "./widgets/streak-card";
-import { WeeklyChart, WeeklyChartSkeleton } from "./widgets/weekly-chart";
-import { VocabularyCard, VocabularyCardSkeleton } from "./widgets/vocabulary-card";
-import { GrammarCard, GrammarCardSkeleton } from "./widgets/grammar-card";
-import { AchievementsCard, AchievementsCardSkeleton } from "./widgets/achievements-card";
-import { AIRecommendations } from "./widgets/ai-recommendations";
 
 // ─── Sync hook — keeps snapshot fresh ────────────────────────────────────────
 

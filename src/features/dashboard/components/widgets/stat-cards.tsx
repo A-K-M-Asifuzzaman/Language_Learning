@@ -1,17 +1,16 @@
 "use client";
 
-import { Flame, Star, BookOpen, PenLine, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { Flame, Star, BookOpen, PenLine, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 
-import { cn } from "@/lib/utils";
+import { XPProgress } from "@/components/ui/progress";
+import { SkeletonStat } from "@/components/ui/skeleton";
+import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
 import { useProgressStore, selectLevelInfo, selectTotalXP } from "@/features/progress/store/progress-store";
 import { useStreakStore, selectCurrentStreak, selectTodayProgress } from "@/features/streak/store/streak-store";
 import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
-import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
-import { SkeletonStat } from "@/components/ui/skeleton";
-import { XPProgress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
+import type { GrammarCategory, GrammarDifficulty, GrammarQuestion } from "@/features/grammar/types";
 import { genAI, GEMINI_MODEL } from "@/lib/gemini";
 import { checkRateLimit } from "@/lib/rate-limit";
-import type { GrammarCategory, GrammarDifficulty, GrammarQuestion } from "@/features/grammar/types";
 
 // ─── Difficulty context ───────────────────────────────────────────────────────
 

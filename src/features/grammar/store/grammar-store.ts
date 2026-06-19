@@ -65,7 +65,7 @@ const initialGrammarState: Omit<
 export const useGrammarStore = create<GrammarState>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set, _get) => ({
         ...initialGrammarState,
 
         // ── registerTopic ────────────────────────────────────────────────

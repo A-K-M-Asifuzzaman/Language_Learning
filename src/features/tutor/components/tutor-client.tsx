@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
-import { Trash2, Info } from "lucide-react";
 import { motion } from "framer-motion";
+import { Trash2, Info } from "lucide-react";
+import { useEffect } from "react";
 
-import { cn } from "@/lib/utils";
-import { useTutorStore, selectMessages, selectIsStreaming } from "../store/tutor-store";
 import { useTutorChat } from "../hooks/use-tutor-chat";
-import { ChatWindow } from "./chat-window";
+import { useTutorStore, selectMessages, selectIsStreaming } from "../store/tutor-store";
+
 import { ChatInput } from "./chat-input";
+import { ChatWindow } from "./chat-window";
 import { ModeSelector } from "./mode-selector";
 
 // ─── Header ───────────────────────────────────────────────────────────────────

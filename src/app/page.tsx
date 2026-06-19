@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Language Learning — Practice English",
+  description:
+    "A production-grade language learning platform for vocabulary, grammar, speaking, and writing practice.",
+};
 
 export default function HomePage() {
   return (

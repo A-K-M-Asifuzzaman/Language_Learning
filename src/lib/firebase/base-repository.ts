@@ -17,8 +17,8 @@ import {
   type Unsubscribe,
 } from "firebase/firestore";
 
-import { db } from "./firestore";
 import { normalizeError } from "./errors";
+import { db } from "./firestore";
 
 /* ============================================================================
    BaseRepository — abstract Firestore repository

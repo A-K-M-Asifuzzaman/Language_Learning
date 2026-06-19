@@ -17,7 +17,7 @@ const HISTORY_LIMIT = 200; // max persisted messages
 export const useTutorStore = create<TutorState>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set, _get) => ({
         messages: [],
         activeMode: "general",
         isStreaming: false,

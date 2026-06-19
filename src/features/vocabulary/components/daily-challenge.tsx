@@ -1,12 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
-import { Flame, Clock, BookOpen, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Clock, BookOpen } from "lucide-react";
+import { useMemo } from "react";
+
 
 import { useVocabularyStore } from "../store/vocabulary-store";
 import type { VocabularyWord } from "../types";
+
 import { FlashcardSession } from "./flashcard-session";
+
 import { EmptyData } from "@/components/ui/empty-state";
 
 interface DailyChallengeProps {
@@ -77,9 +80,8 @@ export function DailyChallenge({ onClose }: DailyChallengeProps) {
       <FlashcardSession
         words={challengeWords}
         title="Daily Challenge"
-        onComplete={(xp) => {
+        onComplete={(_xp) => {
           // XP earned — could hook into progress store here
-          console.log(`Daily challenge complete! +${xp} XP`);
         }}
         onClose={onClose}
       />

@@ -1,11 +1,12 @@
 "use client";
 
-import { Loader2, CheckCheck, RotateCcw, Briefcase, MessageCircle, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
+import { Loader2, CheckCheck, RotateCcw, Briefcase, MessageCircle, BookOpen } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { WRITING_ACTIONS } from "../types";
 import type { WritingAction } from "../types";
+
+import { cn } from "@/lib/utils";
 
 // ─── Icon map ─────────────────────────────────────────────────────────────────
 

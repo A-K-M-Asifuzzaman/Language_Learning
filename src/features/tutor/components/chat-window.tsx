@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 import { useTutorStore, selectMessages, selectActiveMode, selectIsStreaming } from "../store/tutor-store";
 import { TUTOR_MODES } from "../types";
+
 import { ChatMessageBubble } from "./chat-message";
 import { TypingIndicator } from "./typing-indicator";
 
@@ -60,9 +61,7 @@ function EmptyState({ mode }: { mode: string }) {
 }
 
 function QuickSuggestion({ text }: { text: string }) {
-  const addMessage = useTutorStore((s) => s.addMessage);
-  // We need the send fn — import via a callback from parent, but to avoid prop drilling
-  // we dispatch a custom event that ChatInput listens for
+  // Dispatch a custom event that ChatInput listens for — avoids prop drilling
   const handleClick = () => {
     const event = new CustomEvent("tutor:quicksend", { detail: text });
     window.dispatchEvent(event);

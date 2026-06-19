@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useShallow } from "zustand/react/shallow";
 import {
   Plus,
   BookOpen,
@@ -14,19 +12,22 @@ import {
   Download,
   Layers,
 } from "lucide-react";
+import { useState, useMemo, useCallback } from "react";
+import { useShallow } from "zustand/react/shallow";
 
-import { cn } from "@/lib/utils";
-import { useVocabularyStore } from "../store/vocabulary-store";
+
 import { SAMPLE_WORDS } from "../data/sample-words";
+import { useVocabularyStore } from "../store/vocabulary-store";
 import type { VocabularyStatus, VocabularyWord, WordCategory } from "../types";
 
+import { AddWordDialog } from "./add-word-dialog";
+import { DailyChallenge } from "./daily-challenge";
+import { FlashcardSession } from "./flashcard-session";
 import { SearchBar, CategoryFilter, StatusFilter, DifficultyFilter, SortControl, type SortOption } from "./vocabulary-filters";
 import { WordCard } from "./word-card";
-import { FlashcardSession } from "./flashcard-session";
-import { DailyChallenge } from "./daily-challenge";
-import { AddWordDialog } from "./add-word-dialog";
+
 import { EmptyData, EmptySearch } from "@/components/ui/empty-state";
-import { SkeletonCard } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 // ─── Tab types ────────────────────────────────────────────────────────────────
 
@@ -295,9 +296,6 @@ export function VocabularyClient() {
 
   const totalWords = useVocabularyStore((s) => s.totalWords);
   const addWords = useVocabularyStore((s) => s.addWords);
-
-  // Load samples if library is completely empty on first visit
-  const [seeded, setSeeded] = useState(false);
 
   const handleStartFlashcard = useCallback((words: VocabularyWord[]) => {
     setFlashcardWords(words);

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { GrammarClient } from "@/features/grammar/components/grammar-client";
 
 export const metadata: Metadata = {

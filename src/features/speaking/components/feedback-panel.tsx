@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, AlertCircle, Lightbulb, FileText } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import type { PronunciationFeedback } from "../types";
+
+import { cn } from "@/lib/utils";
 
 // ─── Score ring (SVG) ─────────────────────────────────────────────────────────
 

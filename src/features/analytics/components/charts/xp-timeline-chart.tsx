@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { useShallow } from "zustand/react/shallow";
 import {
   AreaChart,
   Area,
@@ -11,21 +10,23 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useShallow } from "zustand/react/shallow";
 
-import {
-  useProgressStore,
-  selectRecentXPEvents,
-} from "@/features/progress/store/progress-store";
 import {
   CHART_COLORS,
   AREA_FILL_OPACITY,
   GRID_COLOR,
   TICK_COLOR,
-  TOOLTIP_STYLE,
   ChartTooltip,
   ChartEmpty,
   formatDate,
 } from "../chart-utils";
+
+import {
+  useProgressStore,
+  selectRecentXPEvents,
+} from "@/features/progress/store/progress-store";
+
 
 // ─── Component ────────────────────────────────────────────────────────────────
 

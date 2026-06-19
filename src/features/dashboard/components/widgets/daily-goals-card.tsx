@@ -1,14 +1,13 @@
 "use client";
 
-import { CheckCircle2, Zap, Clock, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { CheckCircle2, Zap, Clock, BookOpen } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 
-import { cn } from "@/lib/utils";
-import { useStreakStore, selectTodayProgress, selectGoalFraction } from "@/features/streak/store/streak-store";
 import { Progress } from "@/components/ui/progress";
 import { SkeletonCard } from "@/components/ui/skeleton";
+import { useStreakStore, selectTodayProgress, selectGoalFraction } from "@/features/streak/store/streak-store";
+import { cn } from "@/lib/utils";
 
 // ─── Single goal row ──────────────────────────────────────────────────────────
 

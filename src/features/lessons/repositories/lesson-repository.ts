@@ -10,18 +10,11 @@ import {
   orderBy,
   query,
   serverTimestamp,
-  setDoc,
   updateDoc,
   where,
   type FirestoreDataConverter,
   type Unsubscribe,
 } from "firebase/firestore";
-
-import { db } from "@/lib/firebase/firestore";
-import { createConverter, createSubConverter } from "@/lib/firebase/converters";
-import { normalizeError } from "@/lib/firebase/errors";
-import { BaseRepository } from "@/lib/firebase/base-repository";
-import { COLLECTIONS } from "@/lib/constants";
 
 import type {
   CreateLessonInput,
@@ -32,6 +25,13 @@ import type {
   UpdateLessonInput,
   UpdateSectionInput,
 } from "../types";
+
+import { COLLECTIONS } from "@/lib/constants";
+import { BaseRepository } from "@/lib/firebase/base-repository";
+import { createConverter, createSubConverter } from "@/lib/firebase/converters";
+import { normalizeError } from "@/lib/firebase/errors";
+import { db } from "@/lib/firebase/firestore";
+
 
 /* ============================================================================
    LessonRepository — all Firestore reads/writes for the `lessons` collection

@@ -1,14 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RotateCcw, Volume2, VolumeX } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { cn } from "@/lib/utils";
-import type { ConversationTurn, GeminiHistoryItem, ScenarioConfig } from "../types";
 import { useSpeechRecognition } from "../hooks/use-speech-recognition";
 import { useSpeakingStore } from "../store/speaking-store";
+import type { ConversationTurn, GeminiHistoryItem, ScenarioConfig } from "../types";
+
 import { VoiceRecorder } from "./voice-recorder";
+
+import { cn } from "@/lib/utils";
 
 // ─── Message bubble ───────────────────────────────────────────────────────────
 
@@ -341,7 +343,7 @@ export function ConversationSession({ scenario }: ConversationSessionProps) {
             {scenario.label}
           </p>
           <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-            {scenario.description}. The AI will open the conversation and you'll respond by speaking.
+            {scenario.description}. The AI will open the conversation and you&apos;ll respond by speaking.
           </p>
         </div>
         <button

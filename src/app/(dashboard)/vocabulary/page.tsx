@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { VocabularyClient } from "@/features/vocabulary/components/vocabulary-client";
 
 export const metadata: Metadata = {
