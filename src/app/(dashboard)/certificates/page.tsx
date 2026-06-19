@@ -163,9 +163,10 @@ interface CertificateProps {
   tier: CertTier;
   name: string;
   earnedDate: string;
+  preview?: boolean;
 }
 
-function CertificateDocument({ tier, name, earnedDate }: CertificateProps) {
+function CertificateDocument({ tier, name, earnedDate, preview }: CertificateProps) {
   return (
     <div
       className={cn(
@@ -177,6 +178,15 @@ function CertificateDocument({ tier, name, earnedDate }: CertificateProps) {
       {/* Corner decoration */}
       <div className={cn("absolute -left-12 -top-12 h-40 w-40 rounded-full opacity-10", tier.iconBg)} />
       <div className={cn("absolute -bottom-12 -right-12 h-40 w-40 rounded-full opacity-10", tier.iconBg)} />
+
+      {/* Preview watermark */}
+      {preview && (
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <span className="rotate-[-30deg] text-6xl font-black tracking-[.3em] text-muted-foreground/10 select-none">
+            PREVIEW
+          </span>
+        </div>
+      )}
 
       {/* Badge row */}
       <div className="flex flex-col items-center gap-2">
@@ -296,41 +306,30 @@ function RequirementRow({
 
 // ─── Tier card ────────────────────────────────────────────────────────────────
 
+const STAT_MAP = (stats: Stats): Record<string, number> => ({
+  "Earn XP":                  stats.xp,
+  "Reach Level 5":            stats.level,
+  "Reach Level 10":           stats.level,
+  "Reach Level 20":           stats.level,
+  "Reach Level 30":           stats.level,
+  "Learn vocabulary words":   stats.wordsLearned,
+  "Master vocabulary words":  stats.wordsMastered,
+  "Complete grammar topic":   stats.grammarMastered,
+  "Master grammar topics":    stats.grammarMastered,
+  "Master ALL grammar":       stats.grammarMastered,
+  "Best streak":              stats.longestStreak,
+  "Grammar score":            stats.overallGrammarScore,
+  "Speaking & Writing":       0,
+});
+
 function TierCard({
   tier, stats, onView,
 }: {
   tier: CertTier; stats: Stats; onView: (tier: CertTier) => void;
 }) {
-  const earned = tier.check(stats);
-  const pct    = tier.progress(stats);
-
-  const reqValues: Record<string, number> = {
-    "a1": { xp: stats.xp, wordsLearned: stats.wordsLearned, grammarMastered: stats.grammarMastered }["xp"] ? {
-      "Earn XP": stats.xp,
-      "Learn vocabulary words": stats.wordsLearned,
-      "Complete grammar topic": stats.grammarMastered,
-    }["Earn XP"] ?? 0 : 0,
-  };
-  void reqValues;
-
-  const getValue = (label: string) => {
-    const map: Record<string, number> = {
-      "Earn XP":                  stats.xp,
-      "Reach Level 5":            stats.level,
-      "Reach Level 10":           stats.level,
-      "Reach Level 20":           stats.level,
-      "Reach Level 30":           stats.level,
-      "Learn vocabulary words":   stats.wordsLearned,
-      "Master vocabulary words":  stats.wordsMastered,
-      "Complete grammar topic":   stats.grammarMastered,
-      "Master grammar topics":    stats.grammarMastered,
-      "Master ALL grammar":       stats.grammarMastered,
-      "Best streak":              stats.longestStreak,
-      "Grammar score":            stats.overallGrammarScore,
-      "Speaking & Writing":       0,
-    };
-    return map[label] ?? 0;
-  };
+  const earned  = tier.check(stats);
+  const pct     = tier.progress(stats);
+  const statMap = STAT_MAP(stats);
 
   return (
     <div className={cn("flex flex-col gap-5 rounded-2xl border-2 p-5 transition-shadow hover:shadow-elevated", tier.border, tier.bg)}>
@@ -354,12 +353,18 @@ function TierCard({
             <p className="font-semibold text-foreground">{tier.title}</p>
           </div>
         </div>
-        {earned && (
-          <span className="flex items-center gap-1 rounded-full bg-ds-green/15 px-2.5 py-1 text-xs font-bold text-ds-green">
-            <CheckCircle2 className="h-3.5 w-3.5" />
-            Earned
-          </span>
-        )}
+        {earned
+          ? (
+            <span className="flex items-center gap-1 rounded-full bg-ds-green/15 px-2.5 py-1 text-xs font-bold text-ds-green">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              Earned
+            </span>
+          ) : (
+            <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
+              {pct}% done
+            </span>
+          )
+        }
       </div>
 
       {/* Overall progress */}
@@ -372,10 +377,10 @@ function TierCard({
           <div className="h-2 overflow-hidden rounded-full bg-border">
             <div
               className={cn("h-full rounded-full transition-all duration-700 bg-gradient-to-r", {
-                "from-ds-green to-ds-teal":   tier.id === "a1",
-                "from-ds-teal to-primary":    tier.id === "a2",
-                "from-ds-amber to-orange-500":tier.id === "b1",
-                "from-primary to-ds-violet":  tier.id === "b2",
+                "from-ds-green to-ds-teal":    tier.id === "a1",
+                "from-ds-teal to-primary":     tier.id === "a2",
+                "from-ds-amber to-orange-500": tier.id === "b1",
+                "from-primary to-ds-violet":   tier.id === "b2",
                 "from-ds-violet to-purple-600":tier.id === "c1",
               })}
               style={{ width: `${pct}%` }}
@@ -386,32 +391,35 @@ function TierCard({
 
       {/* Requirements */}
       <div className="flex flex-col gap-2.5">
-        {tier.requirements.map((req) => (
-          <RequirementRow
-            key={req.label}
-            label={req.label}
-            icon={req.icon}
-            needed={req.needed}
-            unit={req.unit}
-            current={getValue(req.label)}
-            met={getValue(req.label) >= req.needed}
-          />
-        ))}
+        {tier.requirements.map((req) => {
+          const current = statMap[req.label] ?? 0;
+          return (
+            <RequirementRow
+              key={req.label}
+              label={req.label}
+              icon={req.icon}
+              needed={req.needed}
+              unit={req.unit}
+              current={current}
+              met={current >= req.needed}
+            />
+          );
+        })}
       </div>
 
-      {/* CTA */}
-      {earned && (
-        <button
-          onClick={() => onView(tier)}
-          className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition-all hover:brightness-110 active:scale-[0.98]",
-            tier.iconBg, tier.color,
-          )}
-        >
-          <Trophy className="h-4 w-4" />
-          View &amp; Download Certificate
-        </button>
-      )}
+      {/* CTA — always show, earned gets primary style */}
+      <button
+        onClick={() => onView(tier)}
+        className={cn(
+          "flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition-all active:scale-[0.98]",
+          earned
+            ? cn("hover:brightness-110", tier.iconBg, tier.color)
+            : "border border-border bg-background text-muted-foreground hover:bg-accent hover:text-foreground",
+        )}
+      >
+        {earned ? <Trophy className="h-4 w-4" /> : <Award className="h-4 w-4" />}
+        {earned ? "View & Download Certificate" : "Preview Certificate Design"}
+      </button>
     </div>
   );
 }
@@ -419,39 +427,110 @@ function TierCard({
 // ─── Certificate modal ────────────────────────────────────────────────────────
 
 function CertificateModal({
-  tier, name, onClose,
+  tier, defaultName, earned, onClose,
 }: {
-  tier: CertTier; name: string; onClose: () => void;
+  tier: CertTier; defaultName: string; earned: boolean; onClose: () => void;
 }) {
-  const certRef = useRef<HTMLDivElement>(null);
+  const certRef    = useRef<HTMLDivElement>(null);
+  const [name, setName] = useState(defaultName);
   const earnedDate = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
   function handlePrint() {
-    const content = certRef.current?.innerHTML ?? "";
+    const el = certRef.current;
+    if (!el) return;
+
     const printWindow = window.open("", "_blank");
     if (!printWindow) return;
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>${tier.title} Certificate</title>
-          <style>
-            * { box-sizing: border-box; margin: 0; padding: 0; }
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-            @page { size: A4 landscape; margin: 1cm; }
-          </style>
-          <link rel="stylesheet" href="/globals.css" />
-        </head>
-        <body>${content}</body>
-      </html>
-    `);
+
+    printWindow.document.write(`<!DOCTYPE html>
+<html>
+  <head>
+    <title>${tier.title} Certificate — ${name}</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      @page { size: A4 landscape; margin: 1.5cm; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+        background: white; color: #0f172a;
+        display: flex; align-items: center; justify-content: center; min-height: 100vh;
+      }
+      .cert {
+        position: relative; width: 100%; max-width: 800px;
+        border: 2px solid #6366f1; border-radius: 16px; padding: 48px;
+        display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center;
+        background: #fff;
+      }
+      .badge { display:flex; flex-direction:column; align-items:center; gap:8px; }
+      .icon-wrap { width:64px; height:64px; border-radius:16px; background:#ede9fe; display:flex; align-items:center; justify-content:center; font-size:28px; }
+      .level-badge { background:#ede9fe; color:#6366f1; font-size:11px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; padding:4px 12px; border-radius:999px; }
+      .subtitle { font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:#64748b; }
+      .title { font-size:32px; font-weight:800; color:#6366f1; }
+      .cefr { font-size:13px; color:#94a3b8; margin-top:2px; }
+      hr { width:100%; border:none; border-top:1px solid #e2e8f0; }
+      .to { font-size:11px; color:#94a3b8; }
+      .recipient { font-family: Georgia, 'Times New Roman', serif; font-size:26px; font-weight:700; color:#0f172a; margin:4px 0; }
+      .desc { font-size:13px; color:#64748b; max-width:480px; line-height:1.7; }
+      .skills { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+      .skill { background:#ede9fe; color:#6366f1; font-size:11px; font-weight:600; padding:4px 12px; border-radius:999px; }
+      .footer { display:flex; justify-content:space-between; width:100%; padding-top:16px; border-top:1px solid #e2e8f0; }
+      .footer-col { display:flex; flex-direction:column; align-items:flex-start; gap:2px; }
+      .footer-col:last-child { align-items:flex-end; }
+      .footer-col:nth-child(2) { align-items:center; }
+      .footer-line { height:1px; width:96px; background:#e2e8f0; }
+      .footer-label { font-size:9px; color:#94a3b8; }
+      .footer-value { font-size:11px; font-weight:600; color:#0f172a; }
+      .org { font-family: Georgia, serif; font-size:18px; font-weight:700; }
+      .watermark { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+      .watermark span { font-size:80px; font-weight:900; color:rgba(99,102,241,0.06); letter-spacing:.3em; transform:rotate(-30deg); white-space:nowrap; }
+    </style>
+  </head>
+  <body>
+    <div class="cert">
+      <div class="badge">
+        <div class="icon-wrap">🏆</div>
+        <span class="level-badge">${tier.badge}</span>
+      </div>
+      <div>
+        <p class="subtitle">${tier.subtitle}</p>
+        <h1 class="title">${tier.title}</h1>
+        <p class="cefr">CEFR Level ${tier.level}</p>
+      </div>
+      <hr />
+      <div>
+        <p class="to">This certifies that</p>
+        <p class="recipient">${name}</p>
+        <p class="desc">has successfully demonstrated English language proficiency at the <strong style="color:#6366f1">${tier.level} ${tier.badge}</strong> level through consistent practice, vocabulary mastery, and grammar excellence.</p>
+      </div>
+      <div class="skills">
+        <span class="skill">Vocabulary</span>
+        <span class="skill">Grammar</span>
+        <span class="skill">Speaking</span>
+        <span class="skill">Writing</span>
+      </div>
+      <div class="footer">
+        <div class="footer-col">
+          <div class="footer-line"></div>
+          <p class="footer-label">Date issued</p>
+          <p class="footer-value">${earnedDate}</p>
+        </div>
+        <div class="footer-col">
+          <p class="org">Language Learning</p>
+          <div class="footer-line"></div>
+          <p class="footer-label">Authorised by</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-line"></div>
+          <p class="footer-label">Certificate ID</p>
+          <p class="footer-value" style="font-family:monospace;font-size:9px">${tier.level}-${earnedDate.replace(/\s/g, "").replace(/,/g, "")}-LL</p>
+        </div>
+      </div>
+      ${!earned ? `<div class="watermark"><span>PREVIEW</span></div>` : ""}
+    </div>
+  </body>
+</html>`);
     printWindow.document.close();
     printWindow.focus();
-    setTimeout(() => { printWindow.print(); printWindow.close(); }, 500);
-  }
-
-  function handleDownloadPDF() {
-    window.print();
+    setTimeout(() => { printWindow.print(); printWindow.close(); }, 600);
   }
 
   return (
@@ -461,10 +540,13 @@ function CertificateModal({
 
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div className="flex w-full max-w-2xl flex-col gap-4 rounded-2xl bg-background p-4 shadow-float">
+        <div className="flex w-full max-w-2xl flex-col gap-4 rounded-2xl bg-background p-5 shadow-float">
+
           {/* Toolbar */}
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-foreground">Your Certificate</h2>
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="font-semibold text-foreground">
+              {earned ? "Your Certificate" : "Certificate Preview"}
+            </h2>
             <div className="flex items-center gap-2">
               <button
                 onClick={handlePrint}
@@ -474,7 +556,7 @@ function CertificateModal({
                 Print
               </button>
               <button
-                onClick={handleDownloadPDF}
+                onClick={handlePrint}
                 className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
               >
                 <Download className="h-4 w-4" />
@@ -484,13 +566,33 @@ function CertificateModal({
             </div>
           </div>
 
-          {/* Certificate */}
-          <div ref={certRef}>
-            <CertificateDocument tier={tier} name={name} earnedDate={earnedDate} />
+          {/* Editable name */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-muted-foreground">Name on certificate</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your full name"
+              className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
+
+          {/* Preview banner */}
+          {!earned && (
+            <div className="flex items-center gap-2 rounded-lg border border-ds-amber/30 bg-ds-amber/10 px-3 py-2 text-xs font-medium text-ds-amber">
+              <Award className="h-4 w-4 shrink-0" />
+              Preview only — complete all requirements to earn the official certificate.
+            </div>
+          )}
+
+          {/* Certificate live preview */}
+          <div ref={certRef} className="pointer-events-none">
+            <CertificateDocument tier={tier} name={name || "Your Name"} earnedDate={earnedDate} preview={!earned} />
           </div>
 
           <p className="text-center text-xs text-muted-foreground">
-            Click <strong>Save as PDF</strong> → choose &quot;Save as PDF&quot; in the print dialog to download.
+            Click <strong>Save as PDF</strong> → select &quot;Save as PDF&quot; as the destination in the print dialog.
           </p>
         </div>
       </div>
@@ -510,6 +612,9 @@ export default function CertificatesPage() {
   const grammar     = useGrammarStore(useShallow(selectGrammarOverview));
 
   const [viewTier, setViewTier] = useState<CertTier | null>(null);
+  const [defaultName] = useState(
+    () => (typeof window !== "undefined" ? (localStorage.getItem("cert_name") ?? "") : "") || (user?.displayName ?? user?.email ?? "")
+  );
 
   const stats: Stats = useMemo(() => ({
     xp: totalXP,
@@ -522,9 +627,8 @@ export default function CertificatesPage() {
     overallGrammarScore: grammar.overallScore,
   }), [totalXP, levelInfo, vocabStats, grammar, longestStreak, currentStreak]);
 
-  const earned   = TIERS.filter((t) => t.check(stats));
+  const earned     = TIERS.filter((t) => t.check(stats));
   const inProgress = TIERS.filter((t) => !t.check(stats));
-  const displayName = user?.displayName ?? user?.email ?? "Learner";
 
   return (
     <>
@@ -627,7 +731,8 @@ export default function CertificatesPage() {
       {viewTier && (
         <CertificateModal
           tier={viewTier}
-          name={displayName}
+          defaultName={defaultName}
+          earned={earned.some((t) => t.id === viewTier.id)}
           onClose={() => setViewTier(null)}
         />
       )}
