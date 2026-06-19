@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  BookOpen,
-  ChevronDown,
-  LogOut,
-  Menu,
-  Settings,
-  User,
-} from "lucide-react";
+import { LogOut, Menu, Settings, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,12 +11,19 @@ import { useAuth } from "@/features/auth/hooks/use-auth";
 import { logout } from "@/features/auth/services/auth-service";
 import { cn } from "@/lib/utils";
 
-// ─── Avatar ───────────────────────────────────────────────────────────────────
-
-function UserAvatar({ photoURL, displayName }: { photoURL?: string | null; displayName?: string | null }) {
+function UserAvatar({
+  photoURL,
+  displayName,
+  size = "md",
+}: {
+  photoURL?: string | null;
+  displayName?: string | null;
+  size?: "sm" | "md";
+}) {
   const initials = displayName
     ? displayName.split(" ").map((p) => p[0]).join("").toUpperCase().slice(0, 2)
-    : "U";
+    : "?";
+  const cls = size === "sm" ? "h-7 w-7 text-[10px]" : "h-8 w-8 text-xs";
 
   if (photoURL) {
     return (
@@ -31,40 +31,14 @@ function UserAvatar({ photoURL, displayName }: { photoURL?: string | null; displ
       <img
         src={photoURL}
         alt={displayName ?? "User"}
-        className="h-8 w-8 rounded-full object-cover ring-2 ring-border"
+        className={cn(cls, "rounded-full object-cover ring-2 ring-border")}
       />
     );
   }
-
   return (
-    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground ring-2 ring-border">
+    <div className={cn(cls, "flex items-center justify-center rounded-full bg-primary font-bold text-primary-foreground ring-2 ring-primary/30")}>
       {initials}
     </div>
-  );
-}
-
-// ─── User menu ────────────────────────────────────────────────────────────────
-
-function MenuLink({
-  href,
-  icon,
-  onClick,
-  children,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-    >
-      <span className="text-muted-foreground">{icon}</span>
-      {children}
-    </Link>
   );
 }
 
@@ -84,13 +58,13 @@ function UserMenu() {
       <div className="flex items-center gap-2">
         <Link
           href="/login"
-          className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
         >
           Sign in
         </Link>
         <Link
           href="/register"
-          className="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          className="rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.97]"
         >
           Get started
         </Link>
@@ -102,45 +76,56 @@ function UserMenu() {
     <div className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 rounded-lg px-2 py-1 transition-colors hover:bg-accent"
+        className="flex items-center gap-2 rounded-lg p-1 transition-colors hover:bg-accent"
         aria-expanded={open}
-        aria-haspopup="true"
       >
         <UserAvatar photoURL={user.photoURL} displayName={user.displayName} />
-        <span className="hidden max-w-[120px] truncate text-sm font-medium text-foreground sm:block">
-          {user.displayName ?? user.email}
+        <span className="hidden max-w-[100px] truncate text-sm font-medium text-foreground md:block">
+          {user.displayName?.split(" ")[0] ?? "Account"}
         </span>
-        <ChevronDown
-          className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")}
-        />
       </button>
 
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-full z-50 mt-1.5 w-56 animate-scale-in rounded-xl border border-border bg-popover p-1 shadow-elevated">
-            <div className="px-3 py-2 mb-1">
-              <p className="truncate text-sm font-medium text-foreground">{user.displayName}</p>
-              <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+          <div className="absolute right-0 top-full z-50 mt-2 w-60 animate-scale-in overflow-hidden rounded-xl border border-border bg-popover shadow-float">
+            {/* Profile bar */}
+            <div className="flex items-center gap-3 border-b border-border px-4 py-3">
+              <UserAvatar photoURL={user.photoURL} displayName={user.displayName} />
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-foreground">{user.displayName ?? "Learner"}</p>
+                <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+              </div>
             </div>
-            <div className="my-1 border-t border-border" />
-            <MenuLink href="/dashboard" icon={<BookOpen className="h-4 w-4" />} onClick={() => setOpen(false)}>
-              Dashboard
-            </MenuLink>
-            <MenuLink href="/settings" icon={<Settings className="h-4 w-4" />} onClick={() => setOpen(false)}>
-              Settings
-            </MenuLink>
-            <MenuLink href="/settings" icon={<User className="h-4 w-4" />} onClick={() => setOpen(false)}>
-              Profile
-            </MenuLink>
-            <div className="my-1 border-t border-border" />
-            <button
-              onClick={handleSignOut}
-              className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
-            >
-              <LogOut className="h-4 w-4" />
-              Sign out
-            </button>
+
+            <div className="p-1">
+              <Link
+                href="/settings"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+              >
+                <User className="h-4 w-4 text-muted-foreground" />
+                Profile & Settings
+              </Link>
+              <Link
+                href="/settings"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+              >
+                <Settings className="h-4 w-4 text-muted-foreground" />
+                Preferences
+              </Link>
+            </div>
+
+            <div className="border-t border-border p-1">
+              <button
+                onClick={handleSignOut}
+                className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign out
+              </button>
+            </div>
           </div>
         </>
       )}
@@ -148,34 +133,34 @@ function UserMenu() {
   );
 }
 
-// ─── Header ───────────────────────────────────────────────────────────────────
-
 interface HeaderProps {
   onMenuClick?: () => void;
 }
 
 export function Header({ onMenuClick }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-14 items-center gap-3 px-4 sm:px-6">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+      <div className="flex h-14 items-center gap-3 px-3 sm:px-5">
+        {/* Mobile hamburger */}
         <button
           onClick={onMenuClick}
-          className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:hidden"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:hidden"
           aria-label="Open menu"
         >
           <Menu className="h-5 w-5" />
         </button>
 
-        <Link href="/" className="flex items-center gap-2 font-semibold text-foreground">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">
+        {/* Logo */}
+        <Link href="/dashboard" className="flex items-center gap-2 font-semibold text-foreground">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground shadow-glow-violet">
             L
           </div>
-          <span className="hidden sm:block">{siteConfig.name}</span>
+          <span className="hidden text-sm sm:block">{siteConfig.name}</span>
         </Link>
 
         <div className="flex-1" />
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <ThemeToggle />
           <UserMenu />
         </div>
