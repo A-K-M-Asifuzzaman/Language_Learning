@@ -12,6 +12,8 @@ import {
 import type { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
 import { useTheme } from "next-themes";
 
+import { useShallow } from "zustand/react/shallow";
+
 import {
   useGrammarStore,
   selectAllTopics,
@@ -66,8 +68,8 @@ export function GrammarCard() {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
-  const allTopics = useGrammarStore(selectAllTopics);
-  const overview = useGrammarStore(selectGrammarOverview);
+  const allTopics = useGrammarStore(useShallow(selectAllTopics));
+  const overview = useGrammarStore(useShallow(selectGrammarOverview));
 
   const hasTopics = allTopics.length > 0;
 

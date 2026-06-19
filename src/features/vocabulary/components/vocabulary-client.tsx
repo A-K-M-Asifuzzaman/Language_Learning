@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useShallow } from "zustand/react/shallow";
 import {
   Plus,
   BookOpen,
@@ -42,7 +43,7 @@ const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
 
 function StatsBar() {
   const { totalWords, totalLearned, totalMastered, totalDueToday } = useVocabularyStore(
-    (s) => ({ totalWords: s.totalWords, totalLearned: s.totalLearned, totalMastered: s.totalMastered, totalDueToday: s.totalDueToday })
+    useShallow((s) => ({ totalWords: s.totalWords, totalLearned: s.totalLearned, totalMastered: s.totalMastered, totalDueToday: s.totalDueToday }))
   );
 
   const stats = [
@@ -67,7 +68,7 @@ function StatsBar() {
 // ─── Word library ─────────────────────────────────────────────────────────────
 
 function WordLibrary({ onFlashcard }: { onFlashcard: (words: VocabularyWord[]) => void }) {
-  const allWords = useVocabularyStore((s) => Object.values(s.words));
+  const allWords = useVocabularyStore(useShallow((s) => Object.values(s.words)));
 
   const [search, setSearch]         = useState("");
   const [category, setCategory]     = useState<WordCategory | "all">("all");
@@ -195,9 +196,9 @@ function WordLibrary({ onFlashcard }: { onFlashcard: (words: VocabularyWord[]) =
 // ─── Favorites view ───────────────────────────────────────────────────────────
 
 function FavoritesView({ onFlashcard }: { onFlashcard: (words: VocabularyWord[]) => void }) {
-  const favorites = useVocabularyStore((s) =>
+  const favorites = useVocabularyStore(useShallow((s) =>
     Object.values(s.words).filter((w) => w.isFavorite)
-  );
+  ));
 
   if (favorites.length === 0) {
     return (
@@ -235,7 +236,7 @@ function FavoritesView({ onFlashcard }: { onFlashcard: (words: VocabularyWord[])
 // ─── Flashcard view ───────────────────────────────────────────────────────────
 
 function FlashcardsView() {
-  const allWords = useVocabularyStore((s) => Object.values(s.words));
+  const allWords = useVocabularyStore(useShallow((s) => Object.values(s.words)));
   const getDueWords = useVocabularyStore((s) => s.getDueWords);
 
   const [set, setSet] = useState<"due" | "all" | "new">("due");

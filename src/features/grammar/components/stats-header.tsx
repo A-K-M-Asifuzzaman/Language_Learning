@@ -1,17 +1,19 @@
 "use client";
 
 import { TrendingUp, Target, Trophy, Zap } from "lucide-react";
+import { useShallow } from "zustand/react/shallow";
+
 import { useGrammarStore } from "../store/grammar-store";
 import { cn } from "@/lib/utils";
 
 export function StatsHeader() {
   const { overallScore, overallAccuracy, masteredTopicIds, topics } =
-    useGrammarStore((s) => ({
+    useGrammarStore(useShallow((s) => ({
       overallScore: s.overallScore,
       overallAccuracy: s.overallAccuracy,
       masteredTopicIds: s.masteredTopicIds,
       topics: s.topics,
-    }));
+    })));
 
   const totalTopics = Object.keys(topics).length;
   const accuracyPct = Math.round(overallAccuracy * 100);

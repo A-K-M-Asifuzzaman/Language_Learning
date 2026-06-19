@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 import {
   useTutorStore,
@@ -19,7 +20,7 @@ export function useTutorChat() {
   const setIsStreaming  = useTutorStore((s) => s.setIsStreaming);
   const isStreaming     = useTutorStore((s) => s.isStreaming);
   const activeMode      = useTutorStore(selectActiveMode);
-  const getApiHistory   = useTutorStore(selectApiHistory(20));
+  const getApiHistory   = useTutorStore(useShallow(selectApiHistory(20)));
 
   // Abort controller so users can cancel mid-stream
   const abortRef = useRef<AbortController | null>(null);

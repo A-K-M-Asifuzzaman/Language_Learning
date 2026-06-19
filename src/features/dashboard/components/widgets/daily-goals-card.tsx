@@ -3,6 +3,8 @@
 import { CheckCircle2, Zap, Clock, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { useShallow } from "zustand/react/shallow";
+
 import { cn } from "@/lib/utils";
 import { useStreakStore, selectTodayProgress, selectGoalFraction } from "@/features/streak/store/streak-store";
 import { Progress } from "@/components/ui/progress";
@@ -64,8 +66,8 @@ function GoalRow({ icon, label, current, target, unit, fraction, color, delay }:
 // ─── Main export ──────────────────────────────────────────────────────────────
 
 export function DailyGoalsCard() {
-  const today = useStreakStore(selectTodayProgress);
-  const fractions = useStreakStore(selectGoalFraction);
+  const today = useStreakStore(useShallow(selectTodayProgress));
+  const fractions = useStreakStore(useShallow(selectGoalFraction));
   const allDone = today.goalCompleted;
   const completedCount = [fractions.xp >= 1, fractions.minutes >= 1, fractions.lessons >= 1].filter(Boolean).length;
 

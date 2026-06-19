@@ -3,6 +3,8 @@
 import { Flame, Star, BookOpen, PenLine, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { useShallow } from "zustand/react/shallow";
+
 import { cn } from "@/lib/utils";
 import { useProgressStore, selectLevelInfo, selectTotalXP } from "@/features/progress/store/progress-store";
 import { useStreakStore, selectCurrentStreak, selectTodayProgress } from "@/features/streak/store/streak-store";
@@ -91,12 +93,12 @@ export function StatCardsSkeleton() {
 // ─── Main export ──────────────────────────────────────────────────────────────
 
 export function StatCards() {
-  const levelInfo = useProgressStore(selectLevelInfo);
+  const levelInfo = useProgressStore(useShallow(selectLevelInfo));
   const totalXP = useProgressStore(selectTotalXP);
   const currentStreak = useStreakStore(selectCurrentStreak);
-  const todayProgress = useStreakStore(selectTodayProgress);
-  const vocabStats = useVocabularyStore(selectVocabStats);
-  const grammar = useGrammarStore(selectGrammarOverview);
+  const todayProgress = useStreakStore(useShallow(selectTodayProgress));
+  const vocabStats = useVocabularyStore(useShallow(selectVocabStats));
+  const grammar = useGrammarStore(useShallow(selectGrammarOverview));
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

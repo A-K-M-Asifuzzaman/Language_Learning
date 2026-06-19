@@ -2,6 +2,7 @@
 
 import { Sparkles, BookOpen, PenLine, Clock, ChevronRight, BrainCircuit } from "lucide-react";
 import { motion } from "framer-motion";
+import { useShallow } from "zustand/react/shallow";
 
 import { useGrammarStore, selectAllTopics, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
 import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
@@ -185,11 +186,11 @@ function generateRecommendations(opts: {
 // ─── Main export ──────────────────────────────────────────────────────────────
 
 export function AIRecommendations() {
-  const allTopics = useGrammarStore(selectAllTopics);
-  const grammarOverview = useGrammarStore(selectGrammarOverview);
-  const vocabStats = useVocabularyStore(selectVocabStats);
-  const levelInfo = useProgressStore(selectLevelInfo);
-  const todayProgress = useStreakStore(selectTodayProgress);
+  const allTopics = useGrammarStore(useShallow(selectAllTopics));
+  const grammarOverview = useGrammarStore(useShallow(selectGrammarOverview));
+  const vocabStats = useVocabularyStore(useShallow(selectVocabStats));
+  const levelInfo = useProgressStore(useShallow(selectLevelInfo));
+  const todayProgress = useStreakStore(useShallow(selectTodayProgress));
 
   const weakTopicNames = allTopics
     .filter((t) => t.currentScore < 70)

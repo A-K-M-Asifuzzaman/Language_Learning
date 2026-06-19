@@ -3,6 +3,8 @@
 import { Suspense, useEffect } from "react";
 import { motion } from "framer-motion";
 
+import { useShallow } from "zustand/react/shallow";
+
 import { useProgressStore, selectLevelInfo, selectTotalXP } from "@/features/progress/store/progress-store";
 import { useStreakStore, selectCurrentStreak, selectLongestStreak, selectTodayProgress } from "@/features/streak/store/streak-store";
 import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
@@ -22,12 +24,12 @@ import { AIRecommendations } from "./widgets/ai-recommendations";
 
 function useDashboardSync() {
   const totalXP = useProgressStore(selectTotalXP);
-  const levelInfo = useProgressStore(selectLevelInfo);
+  const levelInfo = useProgressStore(useShallow(selectLevelInfo));
   const currentStreak = useStreakStore(selectCurrentStreak);
   const longestStreak = useStreakStore(selectLongestStreak);
-  const todayProgress = useStreakStore(selectTodayProgress);
-  const vocabStats = useVocabularyStore(selectVocabStats);
-  const grammar = useGrammarStore(selectGrammarOverview);
+  const todayProgress = useStreakStore(useShallow(selectTodayProgress));
+  const vocabStats = useVocabularyStore(useShallow(selectVocabStats));
+  const grammar = useGrammarStore(useShallow(selectGrammarOverview));
   const updateSnapshot = useDashboardStore((s) => s.updateSnapshot);
 
   useEffect(() => {

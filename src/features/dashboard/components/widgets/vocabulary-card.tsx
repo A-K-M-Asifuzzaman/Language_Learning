@@ -11,6 +11,8 @@ import {
 import type { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
 import { Sparkles } from "lucide-react";
 
+import { useShallow } from "zustand/react/shallow";
+
 import { useVocabularyStore, selectVocabStats, selectWordsByStatus } from "@/features/vocabulary/store/vocabulary-store";
 import { cn } from "@/lib/utils";
 import { EmptyData } from "@/components/ui/empty-state";
@@ -43,11 +45,11 @@ function DonutTooltip({ active, payload }: TooltipContentProps<ValueType, NameTy
 // ─── Main export ──────────────────────────────────────────────────────────────
 
 export function VocabularyCard() {
-  const stats = useVocabularyStore(selectVocabStats);
-  const masteredWords = useVocabularyStore(selectWordsByStatus("mastered"));
-  const reviewingWords = useVocabularyStore(selectWordsByStatus("reviewing"));
-  const learningWords = useVocabularyStore(selectWordsByStatus("learning"));
-  const newWords = useVocabularyStore(selectWordsByStatus("new"));
+  const stats = useVocabularyStore(useShallow(selectVocabStats));
+  const masteredWords = useVocabularyStore(useShallow(selectWordsByStatus("mastered")));
+  const reviewingWords = useVocabularyStore(useShallow(selectWordsByStatus("reviewing")));
+  const learningWords = useVocabularyStore(useShallow(selectWordsByStatus("learning")));
+  const newWords = useVocabularyStore(useShallow(selectWordsByStatus("new")));
 
   const hasWords = stats.totalWords > 0;
 

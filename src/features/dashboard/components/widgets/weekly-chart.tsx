@@ -13,6 +13,8 @@ import {
 import type { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
 import { useTheme } from "next-themes";
 
+import { useShallow } from "zustand/react/shallow";
+
 import { useDashboardStore, selectWeeklyActivity } from "@/features/dashboard/store/dashboard-store";
 import { useStreakStore, selectWeekHistory } from "@/features/streak/store/streak-store";
 import { EmptyData } from "@/components/ui/empty-state";
@@ -58,8 +60,8 @@ export function WeeklyChart() {
   const isDark = resolvedTheme === "dark";
 
   // Prefer dashboard store weekly activity; fall back to streak history
-  const dashboardActivity = useDashboardStore(selectWeeklyActivity(7));
-  const streakHistory = useStreakStore(selectWeekHistory);
+  const dashboardActivity = useDashboardStore(useShallow(selectWeeklyActivity(7)));
+  const streakHistory = useStreakStore(useShallow(selectWeekHistory));
 
   // Build chart data — merge both sources (streak history has live today data)
   const chartData = (() => {

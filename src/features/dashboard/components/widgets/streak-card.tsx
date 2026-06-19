@@ -3,6 +3,8 @@
 import { Flame, Snowflake, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { useShallow } from "zustand/react/shallow";
+
 import { cn } from "@/lib/utils";
 import {
   useStreakStore,
@@ -80,7 +82,7 @@ function DayPill({ day, delay }: DayPillProps) {
 export function StreakCard() {
   const currentStreak = useStreakStore(selectCurrentStreak);
   const longestStreak = useStreakStore(selectLongestStreak);
-  const week = useStreakStore(selectWeekHistory);
+  const week = useStreakStore(useShallow(selectWeekHistory));
   // week is newest-first; reverse for display (oldest→today)
   const displayWeek = [...week].reverse();
 
