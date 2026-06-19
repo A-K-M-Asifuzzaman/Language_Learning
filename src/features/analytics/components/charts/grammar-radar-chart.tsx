@@ -17,7 +17,7 @@ import {
   selectAllTopics,
 } from "@/features/grammar/store/grammar-store";
 import type { GrammarCategory } from "@/features/grammar/types";
-import { CHART_COLORS, TICK_COLOR, GRID_COLOR, ChartEmpty } from "../chart-utils";
+import { CHART_COLORS, TICK_COLOR, GRID_COLOR, ChartTooltip, ChartEmpty } from "../chart-utils";
 
 // ─── Category groups ──────────────────────────────────────────────────────────
 
@@ -107,13 +107,18 @@ export function GrammarRadarChart() {
           dot={{ r: 3, fill: CHART_COLORS.violet, strokeWidth: 0 }}
         />
         <Tooltip
-          formatter={(value: number) => [`${value}%`, "Score"]}
-          contentStyle={{
-            background: "hsl(var(--card))",
-            border: "1px solid hsl(var(--border))",
-            borderRadius: 12,
-            fontSize: 11,
-          }}
+          content={(props) => (
+            <ChartTooltip
+              active={props.active}
+              payload={props.payload}
+              label={props.label as string}
+              formatter={(_name, value) => ({
+                label: "Score",
+                value: `${value}%`,
+                color: CHART_COLORS.violet,
+              })}
+            />
+          )}
         />
       </RadarChart>
     </ResponsiveContainer>

@@ -123,18 +123,21 @@ export function AccuracyChart() {
           label={{ value: "70%", position: "right", fontSize: 10, fill: CHART_COLORS.green }}
         />
         <Tooltip
-          content={
+          content={(props) => (
             <ChartTooltip
+              active={props.active}
+              payload={props.payload}
+              label={props.label as string}
               formatter={(name, value) => {
                 const map: Record<string, { label: string; color: string }> = {
-                  grammarAcc: { label: "Grammar", color: CHART_COLORS.violet },
-                  vocabAcc:   { label: "Vocabulary", color: CHART_COLORS.teal },
+                  grammarAcc: { label: "Grammar",    color: CHART_COLORS.violet },
+                  vocabAcc:   { label: "Vocabulary", color: CHART_COLORS.teal   },
                 };
                 const cfg = map[name] ?? { label: name, color: TICK_COLOR };
                 return { label: cfg.label, value: `${value}%`, color: cfg.color };
               }}
             />
-          }
+          )}
         />
         <Legend
           iconSize={8}

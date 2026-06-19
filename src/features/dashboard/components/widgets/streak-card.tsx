@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { Flame, Snowflake, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -10,9 +11,8 @@ import {
   useStreakStore,
   selectCurrentStreak,
   selectLongestStreak,
-  selectWeekHistory,
 } from "@/features/streak/store/streak-store";
-import type { StreakDay, DayStatus } from "@/features/streak/types";
+import { lastNDays, todayDate, type StreakDay, type DayStatus } from "@/features/streak/types";
 import { SkeletonCard } from "@/components/ui/skeleton";
 
 // ─── Day pill ─────────────────────────────────────────────────────────────────
@@ -82,9 +82,28 @@ function DayPill({ day, delay }: DayPillProps) {
 export function StreakCard() {
   const currentStreak = useStreakStore(selectCurrentStreak);
   const longestStreak = useStreakStore(selectLongestStreak);
-  const week = useStreakStore(useShallow(selectWeekHistory));
-  // week is newest-first; reverse for display (oldest→today)
-  const displayWeek = [...week].reverse();
+  // Read raw history array directly (stable store reference — no new objects on each call)
+  const history = useStreakStore(useShallow((s) => s.history));
+
+  // Compute week display client-side so getServerSnapshot stays stable
+  const displayWeek = useMemo(() => {
+    const today = todayDate();
+    const days  = lastNDays(7);
+    const map   = Object.fromEntries(history.map((d) => [d.date, d]));
+    return days
+      .map(
+        (date): StreakDay =>
+          map[date] ?? {
+            date,
+            status:           date < today ? "missed" : "pending",
+            xpEarned:         0,
+            minutesPracticed: 0,
+            lessonsCompleted: 0,
+            wordsReviewed:    0,
+          }
+      )
+      .reverse(); // oldest → today (left → right)
+  }, [history]);
 
   return (
     <div className="flex flex-col rounded-2xl border border-border bg-card p-5 shadow-soft">

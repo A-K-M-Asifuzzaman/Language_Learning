@@ -32,16 +32,13 @@ export interface TooltipRow {
 // We define our own props interface — we do NOT extend Recharts' TooltipProps
 // to avoid type conflicts with the library's formatter signatures.
 
-interface PayloadEntry {
-  name?:  string | number;
-  value?: string | number;
-  color?: string;
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyPayload = ReadonlyArray<any>;
 
 interface ChartTooltipProps {
-  active?:   boolean;
-  payload?:  PayloadEntry[];
-  label?:    string | number;
+  active?:    boolean;
+  payload?:   AnyPayload;
+  label?:     string | number;
   formatter?: (name: string, value: number) => TooltipRow;
 }
 

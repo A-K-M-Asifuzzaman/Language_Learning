@@ -12,7 +12,7 @@ import {
 } from "recharts";
 
 import { useVocabularyStore } from "@/features/vocabulary/store/vocabulary-store";
-import { CHART_COLORS, TICK_COLOR, ChartEmpty } from "../chart-utils";
+import { CHART_COLORS, TICK_COLOR, ChartTooltip, ChartEmpty } from "../chart-utils";
 import type { VocabularyState } from "@/features/vocabulary/types";
 
 // ─── Selector ─────────────────────────────────────────────────────────────────
@@ -94,13 +94,18 @@ export function VocabularyDonutChart() {
             <CentreLabel total={counts.total} />
           </Pie>
           <Tooltip
-            formatter={(value: number, name: string) => [`${value} words`, name]}
-            contentStyle={{
-              background: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: 12,
-              fontSize: 11,
-            }}
+            content={(props) => (
+              <ChartTooltip
+                active={props.active}
+                payload={props.payload}
+                formatter={(name, value) => ({
+                  label: name,
+                  value: `${value} words`,
+                  color:
+                    data.find((d) => d.name === name)?.color ?? CHART_COLORS.muted,
+                })}
+              />
+            )}
           />
           <Legend
             iconSize={8}

@@ -92,7 +92,7 @@ export function XPTimelineChart() {
           content={(props) => (
             <ChartTooltip
               active={props.active}
-              payload={props.payload as Parameters<typeof ChartTooltip>[0]["payload"]}
+              payload={props.payload}
               label={props.label as string}
               formatter={(name, value) => {
                 const map: Record<string, { label: string; color: string }> = {

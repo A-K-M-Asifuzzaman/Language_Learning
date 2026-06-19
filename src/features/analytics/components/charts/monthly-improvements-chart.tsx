@@ -116,19 +116,22 @@ export function MonthlyImprovementsChart() {
               tickLine={false}
             />
             <Tooltip
-              content={
+              content={(props) => (
                 <ChartTooltip
+                  active={props.active}
+                  payload={props.payload}
+                  label={props.label as string}
                   formatter={(name, value) => {
                     const map: Record<string, { label: string; color: string; unit: string }> = {
-                      xp:      { label: "Daily XP",  color: CHART_COLORS.violet, unit: " XP" },
-                      avgXP:   { label: "7-day Avg", color: CHART_COLORS.orange, unit: " XP" },
+                      xp:      { label: "Daily XP",  color: CHART_COLORS.violet, unit: " XP"  },
+                      avgXP:   { label: "7-day Avg", color: CHART_COLORS.orange, unit: " XP"  },
                       minutes: { label: "Minutes",   color: CHART_COLORS.teal,   unit: " min" },
                     };
                     const cfg = map[name] ?? { label: name, color: TICK_COLOR, unit: "" };
                     return { label: cfg.label, value: `${value}${cfg.unit}`, color: cfg.color };
                   }}
                 />
-              }
+              )}
             />
             <Legend
               iconSize={8}

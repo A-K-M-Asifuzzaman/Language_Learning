@@ -84,19 +84,22 @@ export function WeeklyActivityChart() {
           unit="m"
         />
         <Tooltip
-          content={
+          content={(props) => (
             <ChartTooltip
+              active={props.active}
+              payload={props.payload}
+              label={props.label as string}
               formatter={(name, value) => {
                 const labels: Record<string, { label: string; color: string; unit: string }> = {
-                  xp:      { label: "XP Earned",  color: CHART_COLORS.violet, unit: " XP" },
-                  minutes: { label: "Practice",   color: CHART_COLORS.teal,   unit: " min" },
-                  words:   { label: "Words",      color: CHART_COLORS.green,  unit: "" },
+                  xp:      { label: "XP Earned", color: CHART_COLORS.violet, unit: " XP"  },
+                  minutes: { label: "Practice",  color: CHART_COLORS.teal,   unit: " min" },
+                  words:   { label: "Words",     color: CHART_COLORS.green,  unit: ""     },
                 };
                 const cfg = labels[name] ?? { label: name, color: TICK_COLOR, unit: "" };
                 return { label: cfg.label, value: `${value}${cfg.unit}`, color: cfg.color };
               }}
             />
-          }
+          )}
         />
         <Legend
           iconSize={8}
