@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 
 
+import { cn } from "@/lib/utils";
+
 import { GRADE_CONFIG } from "../constants";
 import { useGrammarStore } from "../store/grammar-store";
 import type { GrammarCategory, GrammarDifficulty } from "../types";
 
-import { cn } from "@/lib/utils";
 
 interface TopicCardProps {
   category: GrammarCategory;

@@ -1,3 +1,6 @@
+import { STORAGE_PATHS } from "@/lib/constants";
+import { uploadFile } from "@/lib/firebase/storage";
+
 import {
   vocabularyRepository,
   type IVocabularyRepository,
@@ -9,8 +12,6 @@ import type {
   VocabularyEntryFilters,
 } from "../types/firestore";
 
-import { STORAGE_PATHS } from "@/lib/constants";
-import { uploadFile } from "@/lib/firebase/storage";
 
 
 /* ============================================================================

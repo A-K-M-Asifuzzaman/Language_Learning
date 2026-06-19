@@ -14,13 +14,6 @@ import {
 } from "recharts";
 import { useShallow } from "zustand/react/shallow";
 
-import {
-  CHART_COLORS,
-  GRID_COLOR,
-  TICK_COLOR,
-  ChartTooltip,
-  ChartEmpty,
-} from "../chart-utils";
 
 import {
   useGrammarStore,
@@ -28,6 +21,14 @@ import {
 } from "@/features/grammar/store/grammar-store";
 import { useVocabularyStore } from "@/features/vocabulary/store/vocabulary-store";
 import type { VocabularyState } from "@/features/vocabulary/types";
+
+import {
+  CHART_COLORS,
+  GRID_COLOR,
+  TICK_COLOR,
+  ChartTooltip,
+  ChartEmpty,
+} from "../chart-utils";
 
 
 // ─── Vocab selector ───────────────────────────────────────────────────────────

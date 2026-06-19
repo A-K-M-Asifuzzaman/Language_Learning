@@ -5,6 +5,8 @@ import { LayoutGrid, History, Clock, Target } from "lucide-react";
 import { useState } from "react";
 
 
+import { cn } from "@/lib/utils";
+
 import { GRAMMAR_TOPICS } from "../constants";
 import { useGrammarStore } from "../store/grammar-store";
 import type { GrammarCategory, GrammarDifficulty } from "../types";
@@ -13,7 +15,6 @@ import { QuizSession } from "./quiz-session";
 import { StatsHeader } from "./stats-header";
 import { TopicCard, DifficultyModal } from "./topic-card";
 
-import { cn } from "@/lib/utils";
 
 // ─── Tab types ────────────────────────────────────────────────────────────────
 

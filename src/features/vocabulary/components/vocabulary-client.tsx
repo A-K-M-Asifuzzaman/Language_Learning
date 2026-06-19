@@ -16,6 +16,9 @@ import { useState, useMemo, useCallback } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 
+import { EmptyData, EmptySearch } from "@/components/ui/empty-state";
+import { cn } from "@/lib/utils";
+
 import { SAMPLE_WORDS } from "../data/sample-words";
 import { useVocabularyStore } from "../store/vocabulary-store";
 import type { VocabularyStatus, VocabularyWord, WordCategory } from "../types";
@@ -26,8 +29,6 @@ import { FlashcardSession } from "./flashcard-session";
 import { SearchBar, CategoryFilter, StatusFilter, DifficultyFilter, SortControl, type SortOption } from "./vocabulary-filters";
 import { WordCard } from "./word-card";
 
-import { EmptyData, EmptySearch } from "@/components/ui/empty-state";
-import { cn } from "@/lib/utils";
 
 // ─── Tab types ────────────────────────────────────────────────────────────────
 

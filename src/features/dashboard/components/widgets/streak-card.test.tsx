@@ -1,9 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { StreakCard } from "./streak-card";
 
 import { useStreakStore } from "@/features/streak/store/streak-store";
 import { render, screen } from "@/test/test-utils";
+
+import { StreakCard } from "./streak-card";
 
 
 // ─── Setup ────────────────────────────────────────────────────────────────────

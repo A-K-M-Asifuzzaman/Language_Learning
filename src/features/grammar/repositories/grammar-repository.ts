@@ -5,9 +5,10 @@ import {
   type QueryDocumentSnapshot,
 } from "firebase/firestore";
 
+import { BaseRepository } from "@/lib/firebase/base-repository";
+
 import type { GrammarCategory, GrammarDifficulty, GrammarQuizDoc } from "../types";
 
-import { BaseRepository } from "@/lib/firebase/base-repository";
 
 // ─── Converter ────────────────────────────────────────────────────────────────
 

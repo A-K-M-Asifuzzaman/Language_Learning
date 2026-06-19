@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { RotateCcw, SendHorizonal, Loader2 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { useSpeechRecognition } from "../hooks/use-speech-recognition";
 import { useSpeakingStore } from "../store/speaking-store";
 import type { PronunciationFeedback, ScenarioConfig } from "../types";
@@ -11,7 +13,6 @@ import type { PronunciationFeedback, ScenarioConfig } from "../types";
 import { FeedbackPanel } from "./feedback-panel";
 import { VoiceRecorder } from "./voice-recorder";
 
-import { cn } from "@/lib/utils";
 
 // ─── Practice step ────────────────────────────────────────────────────────────
 

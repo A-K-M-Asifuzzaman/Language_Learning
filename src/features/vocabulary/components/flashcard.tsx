@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import { Volume2, Star, BookOpen } from "lucide-react";
 import { useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 import type { VocabularyWord } from "../types";
 
-import { cn } from "@/lib/utils";
 
 // ─── Difficulty stars ──────────────────────────────────────────────────────────
 

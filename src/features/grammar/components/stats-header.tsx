@@ -3,9 +3,10 @@
 import { TrendingUp, Target, Trophy, Zap } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 
+import { cn } from "@/lib/utils";
+
 import { useGrammarStore } from "../store/grammar-store";
 
-import { cn } from "@/lib/utils";
 
 
 export function StatsHeader() {

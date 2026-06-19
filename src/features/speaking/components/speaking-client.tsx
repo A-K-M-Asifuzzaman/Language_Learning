@@ -5,6 +5,8 @@ import { Mic2, MessageSquare, ChevronLeft, BarChart3, Trophy } from "lucide-reac
 import { useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 
+import { cn } from "@/lib/utils";
+
 import {
   useSpeakingStore,
   selectAllScenarioStats,
@@ -18,7 +20,6 @@ import { ConversationSession } from "./conversation-session";
 import { PracticeSession } from "./practice-session";
 import { ScenarioPicker } from "./scenario-picker";
 
-import { cn } from "@/lib/utils";
 
 // ─── Mode tab ─────────────────────────────────────────────────────────────────
 

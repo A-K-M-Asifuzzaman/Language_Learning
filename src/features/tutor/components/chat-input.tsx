@@ -4,10 +4,11 @@ import { ArrowUp, Square } from "lucide-react";
 import { useRef, useState, useCallback } from "react";
 
 
+import { cn } from "@/lib/utils";
+
 import { useTutorStore, selectActiveMode } from "../store/tutor-store";
 import { TUTOR_MODES } from "../types";
 
-import { cn } from "@/lib/utils";
 
 interface ChatInputProps {
   onSend: (text: string) => void;

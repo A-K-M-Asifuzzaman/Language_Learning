@@ -14,6 +14,11 @@ import {
 } from "recharts";
 import { useShallow } from "zustand/react/shallow";
 
+
+import { useGrammarStore } from "@/features/grammar/store/grammar-store";
+import type { GrammarState } from "@/features/grammar/types";
+import { useStreakStore, selectStreakHistory } from "@/features/streak/store/streak-store";
+
 import {
   CHART_COLORS,
   GRID_COLOR,
@@ -21,10 +26,6 @@ import {
   ChartTooltip,
   ChartEmpty,
 } from "../chart-utils";
-
-import { useGrammarStore } from "@/features/grammar/store/grammar-store";
-import type { GrammarState } from "@/features/grammar/types";
-import { useStreakStore, selectStreakHistory } from "@/features/streak/store/streak-store";
 
 
 

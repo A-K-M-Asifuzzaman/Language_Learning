@@ -8,6 +8,11 @@ import {
   type UseQueryResult,
 } from "@tanstack/react-query";
 
+
+import { useDebounce } from "@/hooks/use-debounce";
+import { QUERY_STALE_TIME } from "@/lib/constants";
+import { vocabularyKeys, type VocabularyListFilters } from "@/lib/firebase/query-keys";
+
 import { vocabularyService } from "../services/vocabulary-service";
 import type {
   CreateVocabularyEntryInput,
@@ -15,10 +20,6 @@ import type {
   VocabularyEntry,
   VocabularyEntryFilters,
 } from "../types/firestore";
-
-import { useDebounce } from "@/hooks/use-debounce";
-import { QUERY_STALE_TIME } from "@/lib/constants";
-import { vocabularyKeys, type VocabularyListFilters } from "@/lib/firebase/query-keys";
 
 
 /* ============================================================================

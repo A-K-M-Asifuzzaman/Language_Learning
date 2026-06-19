@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useShallow } from "zustand/react/shallow";
 
 
+import { cn } from "@/lib/utils";
+
 import {
   useSpeakingStore,
   selectAllScenarioStats,
@@ -11,7 +13,6 @@ import {
 import { SCENARIOS } from "../types";
 import type { SpeakingScenario } from "../types";
 
-import { cn } from "@/lib/utils";
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 

@@ -4,10 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Copy, Check, CornerDownLeft, Sparkles, WandSparkles } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { WRITING_ACTIONS } from "../types";
 import type { WritingAction } from "../types";
 
-import { cn } from "@/lib/utils";
 
 // ─── Word count helper ────────────────────────────────────────────────────────
 

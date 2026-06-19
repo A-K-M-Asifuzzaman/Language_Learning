@@ -13,6 +13,11 @@ import {
 import { useShallow } from "zustand/react/shallow";
 
 import {
+  useProgressStore,
+  selectRecentXPEvents,
+} from "@/features/progress/store/progress-store";
+
+import {
   CHART_COLORS,
   AREA_FILL_OPACITY,
   GRID_COLOR,
@@ -22,10 +27,6 @@ import {
   formatDate,
 } from "../chart-utils";
 
-import {
-  useProgressStore,
-  selectRecentXPEvents,
-} from "@/features/progress/store/progress-store";
 
 
 // ─── Component ────────────────────────────────────────────────────────────────

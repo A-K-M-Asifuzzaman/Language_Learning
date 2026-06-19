@@ -9,6 +9,9 @@ import {
 } from "@tanstack/react-query";
 import { useEffect } from "react";
 
+import { QUERY_STALE_TIME } from "@/lib/constants";
+import { lessonKeys, type LessonListFilters } from "@/lib/firebase/query-keys";
+
 import { lessonService } from "../services/lesson-service";
 import type {
   CreateLessonInput,
@@ -20,8 +23,6 @@ import type {
   UpdateSectionInput,
 } from "../types";
 
-import { QUERY_STALE_TIME } from "@/lib/constants";
-import { lessonKeys, type LessonListFilters } from "@/lib/firebase/query-keys";
 
 
 /* ============================================================================

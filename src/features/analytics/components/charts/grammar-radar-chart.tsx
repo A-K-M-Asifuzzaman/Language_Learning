@@ -12,13 +12,14 @@ import {
 } from "recharts";
 import { useShallow } from "zustand/react/shallow";
 
-import { CHART_COLORS, TICK_COLOR, GRID_COLOR, ChartTooltip, ChartEmpty } from "../chart-utils";
 
 import {
   useGrammarStore,
   selectAllTopics,
 } from "@/features/grammar/store/grammar-store";
 import type { GrammarCategory } from "@/features/grammar/types";
+
+import { CHART_COLORS, TICK_COLOR, GRID_COLOR, ChartTooltip, ChartEmpty } from "../chart-utils";
 
 
 // ─── Category groups ──────────────────────────────────────────────────────────

@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 
 
+import { cn } from "@/lib/utils";
+
 import { useTutorStore, selectActiveMode } from "../store/tutor-store";
 import { TUTOR_MODES } from "../types";
 
-import { cn } from "@/lib/utils";
 
 export function ModeSelector({ disabled }: { disabled?: boolean }) {
   const activeMode = useTutorStore(selectActiveMode);

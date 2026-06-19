@@ -1,8 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { render, screen } from "@/test/test-utils";
+
 import { Button } from "./button";
 
-import { render, screen } from "@/test/test-utils";
 
 
 describe("Button", () => {

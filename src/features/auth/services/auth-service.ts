@@ -9,11 +9,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-import type { LoginCredentials, RegisterCredentials } from "../types";
 
 import { COLLECTIONS } from "@/lib/constants";
 import { firebaseApp } from "@/lib/firebase/config";
 import { setDocument } from "@/lib/firebase/firestore";
+
+import type { LoginCredentials, RegisterCredentials } from "../types";
 
 
 export const auth = getAuth(firebaseApp);

@@ -5,12 +5,13 @@ import { Clock, BookOpen } from "lucide-react";
 import { useMemo } from "react";
 
 
+import { EmptyData } from "@/components/ui/empty-state";
+
 import { useVocabularyStore } from "../store/vocabulary-store";
 import type { VocabularyWord } from "../types";
 
 import { FlashcardSession } from "./flashcard-session";
 
-import { EmptyData } from "@/components/ui/empty-state";
 
 interface DailyChallengeProps {
   onClose?: () => void;

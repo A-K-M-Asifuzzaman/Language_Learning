@@ -7,6 +7,13 @@ import {
 import { useShallow } from "zustand/react/shallow";
 
 
+import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
+import { useProgressStore, selectTotalXP, selectLevelInfo } from "@/features/progress/store/progress-store";
+import { useSpeakingStore, selectOverallScore as selectSpeakingScore, selectTotalSessions } from "@/features/speaking/store/speaking-store";
+import { useStreakStore, selectCurrentStreak, selectLongestStreak } from "@/features/streak/store/streak-store";
+import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
+import { cn } from "@/lib/utils";
+
 import { ChartCard } from "./chart-card";
 import { AccuracyChart } from "./charts/accuracy-chart";
 import { GrammarRadarChart } from "./charts/grammar-radar-chart";
@@ -16,12 +23,6 @@ import { VocabularyDonutChart } from "./charts/vocabulary-donut-chart";
 import { WeeklyActivityChart } from "./charts/weekly-activity-chart";
 import { XPTimelineChart } from "./charts/xp-timeline-chart";
 
-import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
-import { useProgressStore, selectTotalXP, selectLevelInfo } from "@/features/progress/store/progress-store";
-import { useSpeakingStore, selectOverallScore as selectSpeakingScore, selectTotalSessions } from "@/features/speaking/store/speaking-store";
-import { useStreakStore, selectCurrentStreak, selectLongestStreak } from "@/features/streak/store/streak-store";
-import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
-import { cn } from "@/lib/utils";
 
 // ─── KPI stat card ────────────────────────────────────────────────────────────
 

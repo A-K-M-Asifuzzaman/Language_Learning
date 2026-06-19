@@ -14,6 +14,13 @@ import {
 } from "recharts";
 import { useShallow } from "zustand/react/shallow";
 
+
+import {
+  useDashboardStore,
+  selectWeeklyActivity,
+} from "@/features/dashboard/store/dashboard-store";
+import { useStreakStore, selectWeekHistory } from "@/features/streak/store/streak-store";
+
 import {
   CHART_COLORS,
   GRID_COLOR,
@@ -22,12 +29,6 @@ import {
   ChartEmpty,
   formatDayLabel,
 } from "../chart-utils";
-
-import {
-  useDashboardStore,
-  selectWeeklyActivity,
-} from "@/features/dashboard/store/dashboard-store";
-import { useStreakStore, selectWeekHistory } from "@/features/streak/store/streak-store";
 
 
 // ─── Component ────────────────────────────────────────────────────────────────

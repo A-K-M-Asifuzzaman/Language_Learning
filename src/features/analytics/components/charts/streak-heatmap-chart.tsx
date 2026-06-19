@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
 
-import { ChartEmpty } from "../chart-utils";
 
 import {
   useStreakStore,
@@ -12,6 +11,8 @@ import {
 } from "@/features/streak/store/streak-store";
 import type { DayStatus } from "@/features/streak/types";
 import { cn } from "@/lib/utils";
+
+import { ChartEmpty } from "../chart-utils";
 
 
 // ─── Status → colour mapping ──────────────────────────────────────────────────

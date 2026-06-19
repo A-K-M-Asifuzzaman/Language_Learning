@@ -5,6 +5,12 @@ import { Suspense, useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 
+import { useDashboardStore } from "@/features/dashboard/store/dashboard-store";
+import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
+import { useProgressStore, selectLevelInfo, selectTotalXP } from "@/features/progress/store/progress-store";
+import { useStreakStore, selectCurrentStreak, selectLongestStreak, selectTodayProgress } from "@/features/streak/store/streak-store";
+import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
+
 import { AchievementsCard, AchievementsCardSkeleton } from "./widgets/achievements-card";
 import { AIRecommendations } from "./widgets/ai-recommendations";
 import { DailyGoalsCard, DailyGoalsCardSkeleton } from "./widgets/daily-goals-card";
@@ -14,11 +20,6 @@ import { StreakCard, StreakCardSkeleton } from "./widgets/streak-card";
 import { VocabularyCard, VocabularyCardSkeleton } from "./widgets/vocabulary-card";
 import { WeeklyChart, WeeklyChartSkeleton } from "./widgets/weekly-chart";
 
-import { useDashboardStore } from "@/features/dashboard/store/dashboard-store";
-import { useGrammarStore, selectGrammarOverview } from "@/features/grammar/store/grammar-store";
-import { useProgressStore, selectLevelInfo, selectTotalXP } from "@/features/progress/store/progress-store";
-import { useStreakStore, selectCurrentStreak, selectLongestStreak, selectTodayProgress } from "@/features/streak/store/streak-store";
-import { useVocabularyStore, selectVocabStats } from "@/features/vocabulary/store/vocabulary-store";
 
 // ─── Sync hook — keeps snapshot fresh ────────────────────────────────────────
 

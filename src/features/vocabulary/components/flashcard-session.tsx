@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, X, ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import { useState, useCallback } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { useVocabularyStore } from "../store/vocabulary-store";
 import type { VocabularyWord, RecallQuality } from "../types";
 
 import { Flashcard } from "./flashcard";
 
-import { cn } from "@/lib/utils";
 
 // ─── Quality buttons ──────────────────────────────────────────────────────────
 

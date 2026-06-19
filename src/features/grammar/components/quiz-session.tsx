@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronLeft, Loader2, WifiOff } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { grammarRepository } from "../repositories/grammar-repository";
 import { useGrammarStore } from "../store/grammar-store";
 import type {
@@ -18,7 +20,6 @@ import { QuestionCard } from "./question-card";
 import { ResultsScreen } from "./results-screen";
 
 
-import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

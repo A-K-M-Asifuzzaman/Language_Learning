@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import { Star, Trash2, Volume2, BookOpen, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import { useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { useVocabularyStore } from "../store/vocabulary-store";
 import type { VocabularyWord } from "../types";
 
-import { cn } from "@/lib/utils";
 
 // ─── Status + difficulty helpers ──────────────────────────────────────────────
 

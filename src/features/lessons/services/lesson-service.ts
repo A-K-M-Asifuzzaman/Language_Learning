@@ -1,3 +1,6 @@
+import { STORAGE_PATHS } from "@/lib/constants";
+import { uploadFile, deleteFile } from "@/lib/firebase/storage";
+
 import { lessonRepository, type ILessonRepository } from "../repositories/lesson-repository";
 import type {
   CreateLessonInput,
@@ -10,8 +13,6 @@ import type {
   UpdateSectionInput,
 } from "../types";
 
-import { STORAGE_PATHS } from "@/lib/constants";
-import { uploadFile, deleteFile } from "@/lib/firebase/storage";
 
 
 /* ============================================================================

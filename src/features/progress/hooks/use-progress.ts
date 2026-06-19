@@ -8,6 +8,11 @@ import {
   type UseQueryResult,
 } from "@tanstack/react-query";
 
+
+import type { RecallQuality } from "@/features/vocabulary/types";
+import { QUERY_STALE_TIME } from "@/lib/constants";
+import { progressKeys } from "@/lib/firebase/query-keys";
+
 import { progressService } from "../services/progress-service";
 import type {
   LessonProgressDoc,
@@ -17,10 +22,6 @@ import type {
   UserProgressSummary,
   VocabProgressDoc,
 } from "../types/firestore";
-
-import type { RecallQuality } from "@/features/vocabulary/types";
-import { QUERY_STALE_TIME } from "@/lib/constants";
-import { progressKeys } from "@/lib/firebase/query-keys";
 
 
 /* ============================================================================

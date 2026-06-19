@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Sparkles, Plus, Loader2 } from "lucide-react";
 import { useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { WORD_CATEGORIES } from "../constants";
 import { useVocabularyStore } from "../store/vocabulary-store";
 import type { VocabularyWordInput, WordCategory } from "../types";
 
-import { cn } from "@/lib/utils";
 
 // ─── Small reusable field ─────────────────────────────────────────────────────
 
