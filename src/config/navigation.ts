@@ -5,6 +5,7 @@ import {
   ChartBar,
   FlaskConical,
   LayoutDashboard,
+  PenLine,
   Settings,
   Trophy,
 } from "lucide-react";
@@ -47,6 +48,12 @@ export const navItems: NavItem[] = [
     href: "/grammar",
     icon: FlaskConical,
     description: "AI-powered grammar quizzes",
+  },
+  {
+    label: "Writing",
+    href: "/writing",
+    icon: PenLine,
+    description: "AI writing assistant",
   },
   {
     label: "Progress",
