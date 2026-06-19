@@ -2,7 +2,7 @@
 
 import { Eye, EyeOff, Loader2, Mail, Lock, Chrome } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 import { loginWithEmail, loginWithGoogle } from "../services/auth-service";
@@ -74,6 +74,8 @@ function InputField({ id, label, type, value, onChange, placeholder, icon, suffi
 
 export function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("from") ?? "/dashboard";
   const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw]     = useState(false);
@@ -88,7 +90,7 @@ export function LoginForm() {
     setLoading(true);
     try {
       await loginWithEmail({ email, password });
-      router.push("/dashboard");
+      router.push(redirectTo);
     } catch (err: unknown) {
       const code = (err as { code?: AuthErrorCode }).code ?? "";
       setError(friendlyError(code));
@@ -102,7 +104,7 @@ export function LoginForm() {
     setGoogleLoading(true);
     try {
       await loginWithGoogle();
-      router.push("/dashboard");
+      router.push(redirectTo);
     } catch (err: unknown) {
       const code = (err as { code?: string }).code ?? "";
       setError(friendlyError(code));

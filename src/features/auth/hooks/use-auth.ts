@@ -23,11 +23,15 @@ export function useAuthListener() {
           email: firebaseUser.email ?? "",
           displayName: firebaseUser.displayName,
           photoURL: firebaseUser.photoURL,
-          role: "student", // will be overridden by Firestore user doc in a real app
+          role: "student",
         };
         setUser(user);
+        // Set a session cookie so the middleware can protect routes server-side
+        document.cookie = "auth-session=1; path=/; max-age=86400; SameSite=Lax";
       } else {
         setUser(null);
+        // Clear session cookie on sign-out
+        document.cookie = "auth-session=; path=/; max-age=0; SameSite=Lax";
       }
     });
 
