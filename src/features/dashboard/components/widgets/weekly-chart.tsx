@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useMemo } from "react";
 import {
   Bar,
   BarChart,
@@ -16,8 +17,9 @@ import { useShallow } from "zustand/react/shallow";
 
 import { EmptyData } from "@/components/ui/empty-state";
 import { SkeletonCard } from "@/components/ui/skeleton";
-import { useDashboardStore, selectWeeklyActivity } from "@/features/dashboard/store/dashboard-store";
-import { useStreakStore, selectWeekHistory } from "@/features/streak/store/streak-store";
+import { useDashboardStore } from "@/features/dashboard/store/dashboard-store";
+import { useStreakStore } from "@/features/streak/store/streak-store";
+import { lastNDays } from "@/features/streak/types";
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────
 
@@ -58,14 +60,16 @@ export function WeeklyChart() {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
-  // Prefer dashboard store weekly activity; fall back to streak history
-  const dashboardActivity = useDashboardStore(useShallow(selectWeeklyActivity(7)));
-  const streakHistory = useStreakStore(useShallow(selectWeekHistory));
+  // Subscribe to raw stable arrays — selectors that create new objects break getServerSnapshot
+  const weeklyActivity = useDashboardStore(useShallow((s) => s.weeklyActivity));
+  const streakHistory  = useStreakStore(useShallow((s) => s.history));
 
-  // Build chart data — merge both sources (streak history has live today data)
-  const chartData = (() => {
-    if (dashboardActivity.length > 0) {
-      return [...dashboardActivity]
+  // Compute chart data client-side so getServerSnapshot stays stable
+  const chartData = useMemo(() => {
+    if (weeklyActivity.length > 0) {
+      return [...weeklyActivity]
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .slice(0, 7)
         .reverse()
         .map((d) => ({
           day: formatDate(d.date),
@@ -74,16 +78,18 @@ export function WeeklyChart() {
           lessons: d.lessonsCompleted,
         }));
     }
-    // Fall back to streak history (also newest-first → reverse)
-    return [...streakHistory]
-      .reverse()
-      .map((d) => ({
-        day: formatDate(d.date),
-        xp: d.xpEarned,
-        minutes: d.minutesPracticed,
-        lessons: d.lessonsCompleted,
-      }));
-  })();
+    // Fall back to streak history (newest-first in store → reverse to oldest-first)
+    const days = lastNDays(7);
+    const map  = Object.fromEntries(streakHistory.map((d) => [d.date, d]));
+    return days
+      .map((date) => ({
+        day:     formatDate(date),
+        xp:      map[date]?.xpEarned        ?? 0,
+        minutes: map[date]?.minutesPracticed ?? 0,
+        lessons: map[date]?.lessonsCompleted ?? 0,
+      }))
+      .reverse();
+  }, [weeklyActivity, streakHistory]);
 
   const hasData = chartData.some((d) => d.xp > 0 || d.minutes > 0);
 
